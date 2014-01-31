@@ -1,0 +1,25 @@
+{
+  "name": "pagedek",
+  "version": "0.0.1-alpha",
+  "description": "Static page generator with editor",
+  "main": "pagedek.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "static",
+    "page",
+    "generator"
+  ],
+  "author": "Equan Pr.",
+  "license": "MIT",
+  "dependencies": {
+    "express": "~3.4.8",
+    "nedb": "~0.10.0",
+    "consolidate": "~0.10.0",
+    "handlebars": "~1.3.0",
+    "nconf": "~0.6.9",
+    "github": "~0.1.12",
+    "commander": "~2.1.0"
+  }
+}
