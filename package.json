@@ -4,6 +4,7 @@
   "description": "Static page generator with editor",
   "main": "pagedek.js",
   "scripts": {
+    "start": "node pagedek",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
