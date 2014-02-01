@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+
 h1 {
     font-size: 50px;
     font-weight: bold;
@@ -8,6 +10,7 @@ h1 {
 }
 
 #nav {
+	text-align: right;
 	margin-top: 7px;
 }
 
@@ -18,11 +21,15 @@ h1 {
 
 header {
 	padding-bottom: 50px;
-	margin-bottom: 50px; 
+	margin-bottom: 50px;
+}
+
+.title {
+	font-family: 'Roboto', sans-serif;
 }
 
 div.container {
-    padding-top: 10px;
+    padding-top: 23px;
 }
 
 .editable {
