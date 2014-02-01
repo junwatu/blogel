@@ -1,14 +1,23 @@
 Pagedek
 =======
 
-Static page generator.
+Another static page generator but simpler. I built it for fun and spesific to generate my static blog pages :smile: 
 
->  NOTE: Under Development
 
-###Feature :
+>  NOTE: Under development
+
+###Features
+ 
 - Web editor.
 - Upload static page to Github.
+- Offline backup.
+- ...
 
+###Contribute
+
+Feedback are welcome.
+
+Thank You
 
 ----
 
