@@ -7,12 +7,18 @@ The workflow is simple just like when you are blogging, writing page via web edi
 
 >  NOTE: Under development
 
+it's just a prototype ui
+
+ ![pagedek prototype ui][1]
+
+
 ###Features
  
 - Web editor.
 - Upload static page on cloud or Github.
 - Offline backup.
 - ...
+
 
 ###Contribute
 
@@ -42,3 +48,6 @@ FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+  [1]: https://raw.github.com/junwatu/pagedek/master/screenshot/pagedek-prototype.png
