@@ -1,7 +1,13 @@
 Pagedek
 =======
 
-Static page generator with editor.
+Static page generator.
+
+>  NOTE: Under Development
+
+###Feature :
+- Web editor.
+- Upload static page to Github.
 
 
 ----
