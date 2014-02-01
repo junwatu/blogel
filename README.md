@@ -7,17 +7,20 @@ The workflow is simple just like when you are blogging, writing page via web edi
 
 >  NOTE: Under development
 
-it's just a prototype ui
-
- ![pagedek prototype ui][1]
-
-
 ###Features
  
 - Web editor.
 - Upload static page on cloud or Github.
 - Offline backup.
 - ...
+
+
+###Screenshot
+it's just a prototype ui
+
+ ![pagedek prototype ui][1]
+
+
 
 
 ###Contribute
