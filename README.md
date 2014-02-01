@@ -1,15 +1,16 @@
 Pagedek
 =======
 
-Another static page generator but simpler. I built it for fun and spesific to generate my static blog pages :smile: 
+Another static page generator but simpler and spesific. I built it for fun and to generate my static blog pages :smile:. 
 
+The workflow is simple just like when you are blogging, writing page via web editor and then save it as draft or just publish it on cloud or github. When you publishing page Pagedek will generate it as static page and then upload it on cloud or github.
 
 >  NOTE: Under development
 
 ###Features
  
 - Web editor.
-- Upload static page to Github.
+- Upload static page on cloud or Github.
 - Offline backup.
 - ...
 
