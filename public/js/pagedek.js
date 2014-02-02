@@ -10,3 +10,8 @@
          delay: 0,
          targetBlank: true
      });
+
+$('#save-btn').on('click', function(){
+    var content = editor.serialize();
+    console.log(content);
+});
