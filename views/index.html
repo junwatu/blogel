@@ -20,19 +20,19 @@
             </div>
             <div class="five columns">
                 <ul id="nav">
-                    <li><a href="#" title="Publish"><i class="fa fa-lg fa-cloud-upload"></i></a>
+                    <li><a href="#" title="Publish" id="publish-btn"><i class="fa fa-lg fa-cloud-upload"></i></a>
                     </li>
-                    <li><a href="#" title="Save"><i class="fa fa-lg fa-save"></i></a>
+                    <li><a href="#" title="Save" id="save-btn"><i class="fa fa-lg fa-save"></i></a>
                     </li>
-                    <li><a href="#" title="Settings"><i class="fa fa-lg fa-gear"></i></a>
+                    <li><a href="#" title="Settings" id="setting-btn"><i class="fa fa-lg fa-gear"></i></a>
                     </li>
-                    <li><a href="#" title="Trash"><i class="fa fa-lg fa-trash-o"></i></a>
+                    <li><a href="#" title="Trash" id="trash-btn"><i class="fa fa-lg fa-trash-o"></i></a>
                     </li>
                 </ul>
             </div>
         </header>
         <div class="sixteen columns page-status">
-        	{{page-status}}  <i class="fa fa-calendar-o"></i> {{page-date}} 
+            {{page-status}} <i class="fa fa-calendar-o"></i> {{page-date}}
         </div>
         <h1 class="editable">Static Page Generator</h1>
         <div class="editable sixteen columns">
@@ -43,8 +43,9 @@
             <p>Quisque lobortis nibh ut ante posuere, vitae rutrum tortor cursus.</p>
         </div>
     </div>
+    <script src="js/vendor/jquery-1.11.0.min.js"></script>
     <script src="js/medium-editor.min.js"></script>
-    <script src="js/pagedekui.js"></script>
+    <script src="js/pagedek.js"></script>
 </body>
 
 </html>
