@@ -1,0 +1,52 @@
+@import url(http://fonts.googleapis.com/css?family=Quicksand);
+
+$title-font-face: 'Quicksand', sans-serif; 
+
+h1 {
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    letter-spacing: -2px;
+}
+
+div.container {
+    padding-top: 23px;
+}
+
+#nav {
+    
+    text-align: right;
+    margin-top: 0px;
+    
+    li {
+        display: inline !important;
+        padding: 0px 9px;
+    }
+}
+
+header {
+    padding-bottom: 30px;
+    margin-bottom: 50px;
+}
+
+.page-status {
+	text-align: left;
+	margin-bottom: 35px;
+	color: silver;
+    
+    i {
+        padding: 0px 5px;
+    }
+}
+
+.title {
+    font-family: $title-font-face;
+}
+
+.editable {
+    outline: none;
+    margin: 0 0 20px 0;
+    padding: 0 0 20px 0;
+}
