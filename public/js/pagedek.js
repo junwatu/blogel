@@ -15,8 +15,8 @@
   * Using JQuery
   */
 
- $('#new-btn').on('click', function(){
-    console.log('New Document clicked!');
+ $('#new-btn').on('click', function() {
+     console.log('New Document clicked!');
  });
 
  $('#publish-btn').on('click', function() {
@@ -25,15 +25,31 @@
 
  $('#save-btn').on('click', function() {
      var content = editor.serialize(),
-         json_content = {
-             "title": content['element-0'],
-             "content": content['element-1'],
-             "date-create": Date.now(),
-             "last-update": Date.now(),
-             "status": "draft"
-         }
+         post_content = {
+             post: {
+                 title: content['element-0'],
+                 content: content['element-1'],
+                 date_create: Date.now(),
+                 last_update: Date.now(),
+                 status: "draft"
+             }
+         },
+         pdata = post_content;
 
-     console.log(json_content);
+     console.log(JSON.stringify(pdata));
+     
+     $.ajax({
+        url: '/post',
+        type: 'post',
+        data: pdata,
+        dataType: 'json',
+        success: function(data){
+            console.log(data);
+        },
+        error: function(err){
+            console.log(err);
+        }
+     });
  });
 
  $('#setting-btn').on('click', function() {
