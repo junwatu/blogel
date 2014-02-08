@@ -6,7 +6,7 @@ Another static page generator but simpler and spesific. I built it for fun and t
 The workflow is simple just like when you are blogging, writing page via web editor and then save it as draft or just publish it on cloud or github. When you publishing page Pagedek will generate it as static page and then upload it on cloud or github.
 
 
->  NOTE: Under development
+>  NOTE: it's alpha! so i don't guarantee this app will works like it should
 
 
 ###Features
