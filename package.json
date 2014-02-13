@@ -22,11 +22,13 @@
     "nconf": "~0.6.9",
     "github": "~0.1.12",
     "commander": "~2.1.0",
-    "moment": "~2.5.1"
+    "moment": "~2.5.1",
+    "rsvp": "~3.0.3"
   },
   "devDependencies": {
     "gulp-util": "~2.2.13",
     "gulp": "~3.5.0",
-    "gulp-sass": "~0.6.0"
+    "gulp-sass": "~0.6.0",
+    "gulp-open": "~0.2.8"
   }
 }
