@@ -41,7 +41,7 @@
             };
 
         $.ajax({
-            url: '/post',
+            url: '/api/posts',
             type: 'post',
             data: post_content,
             dataType: 'json',
