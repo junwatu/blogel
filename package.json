@@ -23,7 +23,10 @@
     "github": "~0.1.12",
     "commander": "~2.1.0",
     "moment": "~2.5.1",
-    "rsvp": "~3.0.3"
+    "rsvp": "~3.0.3",
+    "passport": "~0.2.0",
+    "passport-local": "~0.1.6",
+    "connect-flash": "~0.1.1"
   },
   "devDependencies": {
     "gulp-util": "~2.2.13",
