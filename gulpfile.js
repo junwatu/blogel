@@ -36,4 +36,4 @@ gulp.task('watch', function() {
     gulp.watch(paths.scss, ['scss'])
 });
 
-gulp.task('default', ['scss', 'server', 'watch']);
+gulp.task('default', ['scss', 'watch']);
