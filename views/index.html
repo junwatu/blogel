@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/skeleton/skeleton.css">
     <link rel="stylesheet" href="css/medium-editor.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
+   
     <link rel="stylesheet" href="css/pagedek.css">
 </head>
 
@@ -18,34 +19,19 @@
             <div class="eleven columns">
                 <h5 class="title" title="Write and publish static pages!">PAGEDEK</h5>
             </div>
-            <div class="five columns">
-                <ul id="nav">
-                    <li><a href="#" title="New Document" id="new-btn"><i class="fa fa-lg fa-plus"></i></a>
-                    </li>
-                    <li><a href="#" title="Save Draft" id="save-btn"><i class="fa fa-lg fa-save"></i></a>
-                    </li>
-                    <li><a href="#" title="Publish" id="publish-btn"><i class="fa fa-lg fa-cloud-upload"></i></a>
-                    </li>
-                    <li><a href="#" title="Settings" id="setting-btn"><i class="fa fa-lg fa-gear"></i></a>
-                    </li>
-                    <li><a href="#" title="Trash" id="trash-btn"><i class="fa fa-lg fa-trash-o"></i></a>
-                    </li>
-
-                    <li><a href="#" title="{{user-status}}" id="user-btn"><i class="fa fa-lg fa-sign-in"></i></a>
-                    </li>
-                </ul>
-            </div>
         </header>
-        <div class="sixteen columns page-status">
-            {{page-status}} <i class="fa fa-calendar-o"></i> {{page-date}}
-        </div>
-        <h1 class="editable">Static Page Generator</h1>
-        <div class="editable sixteen columns">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nec quam condimentum, varius est ac, vehicula eros. Nunc sit amet massa consequat, imperdiet dolor eu, consequat orci. In justo dui, molestie in gravida vitae, tempus ut velit. Proin adipiscing dolor sed pharetra sagittis. Quisque et urna nec nibh interdum fermentum. Curabitur nibh tortor, condimentum et ante eu, imperdiet semper dolor. Fusce placerat sapien eu risus rutrum, eget laoreet sapien elementum. Quisque vitae urna ipsum. Fusce tempor tortor sit amet est sodales porta. Vivamus consectetur consectetur consectetur. Sed vitae nunc nec purus blandit luctus id vel purus. Sed accumsan, sem ut egestas vestibulum, ipsum magna malesuada magna, nec viverra mi dolor vitae nisi. Duis malesuada mi eu lacus interdum, nec hendrerit arcu lacinia.</p>
+        <div class="sixteen columns">
+            <div class="text-center">
+                <h1>
+                    <span class="fa fa-lock"></span> Static Page Generator</h1> 
+                <p>Login or Register with:</p>
 
-            <p>Phasellus dapibus dolor in erat tristique adipiscing. Donec ut dui hendrerit elit venenatis vestibulum eu in dui. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam mollis euismod nisl consequat rutrum. Etiam lobortis feugiat laoreet. Nam enim felis, egestas in ante ut, auctor viverra ipsum. Fusce sem ipsum, fringilla a lectus nec, sodales luctus nibh. Etiam non varius risus. Vivamus laoreet tempor quam, et accumsan magna. Cras convallis augue sit amet feugiat egestas. Suspendisse adipiscing elementum mi, eget rhoncus lacus lacinia et. Aliquam egestas, tortor in ultricies tempus, mi libero hendrerit urna, quis volutpat lacus dui id arcu. Morbi vitae semper enim. Integer mauris dolor, tincidunt nec ipsum ut, mattis aliquet nunc.</p>
+                <a href="/login" class="button">
+                    <span class="fa fa-user"></span> Login</a>
+                <a href="/signup" class="button">
+                    <span class="fa fa-user"></span> Signup</a>
+            </div>
 
-            <p>Quisque lobortis nibh ut ante posuere, vitae rutrum tortor cursus.</p>
         </div>
     </div>
     <!-- should be bundled -->
