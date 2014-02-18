@@ -3,7 +3,6 @@
 		"port": 5555
 	},
 	"logger": {
-		"filename": "/logs/pagedek.log",
-		"level": "ALL"
+		"filename": "/logs/pagedek.log"
 	}
 }
