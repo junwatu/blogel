@@ -23,6 +23,11 @@
             </div>
         </header>
         <h1 class="loginHeader">Signup</h1>
+
+        {{#if message}}
+            <div class="simplenotif">{{message}}</div>
+        {{/if}}
+        
         <div class="sixteen columns">
             <!-- LOGIN FORM -->
             <form action="/signup" method="post">
