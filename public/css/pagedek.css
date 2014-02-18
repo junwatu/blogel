@@ -44,3 +44,7 @@ header {
 
 .text-center {
   text-align: center; }
+
+.simplenotif {
+  padding: 0px 10px 25px;
+  color: red; }
