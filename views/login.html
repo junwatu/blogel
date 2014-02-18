@@ -23,6 +23,11 @@
             </div>
         </header>
         <h1 class="loginHeader">Login</h1>
+        
+        {{#if message}}
+            <div class="simplenotif">{{message}}</div>
+        {{/if}}
+        
         <div class="sixteen columns">
             <!-- LOGIN FORM -->
             <form action="/login" method="post">
@@ -35,7 +40,7 @@
                     <input type="password" name="password">
                 </div>
 
-                <button type="submit" >Login</button>
+                <button type="submit">Login</button>
             </form>
 
             <hr>
