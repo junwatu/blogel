@@ -1,9 +1,9 @@
 Blogel
 =======
 
-Another static page generator but simpler and spesific. I built it for fun and to generate my static blog pages :smile:. 
+Another static page generator but simpler and spesific. I built it for fun and to generate my static blog pages on [http://equan.me](http://equan.me) :smile:. 
 
-The workflow is simple just like when you are blogging, writing page via web editor and then save it as draft or just publish it on cloud or github. When you publishing page Pagedek will generate it as static page and then upload it on cloud or github.
+The workflow is simple just like when you are blogging, writing page via web editor and then save it as draft or just publish it on cloud or github. When you publishing page Blogel will generate it as static page and then upload it on cloud or github.
 
 
 >  NOTE: it's alpha! so i don't guarantee this app will works like it should
@@ -12,25 +12,24 @@ The workflow is simple just like when you are blogging, writing page via web edi
 ###Features
  
 - Web editor.
-- Upload static page on cloud or Github.
+- Upload pages to Github.
 - Offline backup.
-
-
-###Screenshot
-
-
-
- ![pagedek prototype ui][1]
-
 
 ###Install
 
-> TODO
-
+    $ npm install blogel
+    
 ###Usage
 
-> TODO
+Start the server
+
+    $ npm start
 	
+Open the browser 
+
+    http://localhost:5555
+    
+Write and post it :octopus:
 
 ###Contribute
 
@@ -42,7 +41,7 @@ Thank You
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Equan Pr.
+Copyright (c) 2015 Equan Pr.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -61,5 +60,3 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
-  [1]: https://raw.github.com/junwatu/pagedek/master/screenshot/pagedek-prototype.png
