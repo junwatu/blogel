@@ -1,4 +1,4 @@
-Pagedek
+Blogel
 =======
 
 Another static page generator but simpler and spesific. I built it for fun and to generate my static blog pages :smile:. 

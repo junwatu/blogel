@@ -1,7 +1,3 @@
-/**
- *  Gulp build
- */
- 
 "use strict";
 
 var gulp = require('gulp');
