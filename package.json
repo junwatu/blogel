@@ -1,11 +1,14 @@
 {
-  "name": "pagedek",
+  "name": "blogel",
   "version": "0.0.1-alpha",
   "description": "Static page generator with editor",
-  "main": "pagedek.js",
+  "main": "blogel.js",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/junwatu/blogel.git"
+  },
   "scripts": {
-    "start": "node pagedek",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node blogel"
   },
   "keywords": [
     "static",
@@ -33,12 +36,5 @@
     "passport-local": "~0.1.6",
     "rsvp": "~3.0.3",
     "winston": "~0.7.2"
-  },
-  "devDependencies": {
-    "gulp": "~3.5.0",
-    "gulp-open": "~0.2.8",
-    "gulp-sass": "~0.6.0",
-    "gulp-uglify": "^0.2.1",
-    "gulp-util": "~2.2.13"
   }
 }
