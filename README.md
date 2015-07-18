@@ -10,7 +10,7 @@ The workflow is simple just like when you are blogging, writing page via web edi
 
 
 ###Features
- 
+- Generate static page.
 - Web editor.
 - Upload pages to Github.
 - Offline backup.
@@ -30,6 +30,10 @@ Open the browser
     http://localhost:5555
     
 Write and post it :octopus:
+
+###Screenshot
+
+![blogel-screenhost](https://raw.githubusercontent.com/junwatu/blogel/master/screenshot/screenshot.png)
 
 ###Contribute
 
