@@ -1,24 +1,20 @@
-/**
- * Main Application JS
- */
-
 (function() {
-
     'use strict';
-
-    var elements = document.querySelectorAll('.editable'),
-        editor = new MediumEditor(elements, {
-            anchorInputPlaceholder: 'Type a link',
-            buttons: ['bold', 'italic', 'underline', 'anchor', 'header1', 'header2', 'quote', 'pre'],
-            firstHeader: 'h1',
-            secondHeader: 'h2',
-            delay: 0,
-            targetBlank: true
-        });
-
-    /**
-     * Event Handlers
-     */
+    var editor = new MediumEditor(document.querySelectorAll('.editable'), {
+        toolbar: {
+            allowMultiParagraphSelection: true,
+            buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'h3', 'quote', 'pre'],
+            diffLeft: 0,
+            diffTop: -10,
+            firstButtonClass: 'medium-editor-button-first',
+            lastButtonClass: 'medium-editor-button-last',
+            standardizeSelectionStart: false,
+            static: false,
+            align: 'center',
+            sticky: false,
+            updateOnEmptySelection: false
+        }
+    });
 
     function onNewDocument(event) {
         console.log('New Document clicked!');
@@ -60,13 +56,9 @@
         console.log('trash-btn clicked!');
     }
 
-    /**
-     * Register Event Handlers
-     */
     $('#new-btn').on('click', onNewDocument);
     $('#publish-btn').on('click', onPublish);
     $('#save-btn').on('click', onSave);
     $('#setting-btn').on('click', onSetting);
     $('#trash-btn').on('click', onDeleteDoc);
-
 })();
