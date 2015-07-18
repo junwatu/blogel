@@ -8,8 +8,8 @@
     "url": "https://github.com/junwatu/blogel.git"
   },
   "scripts": {
-    "start": "npm run build && node blogel",
-    "build": "cp -v ./node_modules/medium-editor/dist/js/medium-editor.min.js public/js && mkdir public/css/themes && cp -v ./node_modules/medium-editor/dist/css/medium-editor.css public/css && cp -rvf ./node_modules/medium-editor/dist/css/themes/default*.css public/css/themes"
+    "start": "node blogel.js",
+    "build": "scripts/copy-assets.sh"
   },
   "keywords": [
     "static",
