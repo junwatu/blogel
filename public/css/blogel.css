@@ -10,6 +10,15 @@ h1 {
 div.container {
   padding-top: 23px; }
 
+pre {
+  font-family: 'Menlo', monospace;
+  font-size: 15px;
+  background-color: #f0f0f0;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #666; }
+
 #nav {
   text-align: right;
   margin-top: 0px; }
@@ -29,7 +38,7 @@ header {
     padding: 0px 5px; }
 
 .title {
-  font-family: 'Quicksand', sans-serif; }
+  font-family: "Quicksand", sans-serif; }
 
 .editable {
   outline: none;
@@ -49,12 +58,4 @@ header {
   padding: 0px 10px 25px;
   color: red; }
 
-pre {
-    font-family: 'Menlo', monospace;
-    font-size: 15px;
-    background-color: #f0f0f0;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    color: #666;
-}
+/*# sourceMappingURL=blogel.css.map */
