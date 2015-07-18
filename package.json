@@ -9,7 +9,10 @@
   },
   "scripts": {
     "start": "node blogel.js",
-    "build": "scripts/copy-assets.sh"
+    "build": "npm run copy && npm run build-css",
+    "build-css": "sass scss/blogel.scss public/css/blogel.css",
+    "watch-css": "onchange scss/blogel.scss -- npm run build-css",
+    "copy": "scripts/copy-assets.sh"
   },
   "keywords": [
     "static",
@@ -41,5 +44,9 @@
     "passport": "~0.2.0",
     "passport-local": "~0.1.6",
     "winston": "~0.7.2"
+  },
+  "devDependencies": {
+    "node-sass": "^3.2.0",
+    "onchange": "^1.1.0"
   }
 }
