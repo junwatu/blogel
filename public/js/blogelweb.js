@@ -1,5 +1,7 @@
 (function() {
     'use strict';
+
+    var MediumEditor = require('medium-editor');
     var editor = new MediumEditor(document.querySelectorAll('.editable'), {
         toolbar: {
             allowMultiParagraphSelection: true,
