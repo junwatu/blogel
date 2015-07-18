@@ -34,8 +34,6 @@
                 post: {
                     title: content['element-0'],
                     content: content['element-1'],
-                    date_create: Date.now(),
-                    last_update: Date.now(),
                     status: "draft"
                 }
             };
