@@ -13,7 +13,10 @@
   "keywords": [
     "static",
     "page",
-    "generator"
+    "static page",
+    "generator",
+    "static page generator",
+    "static page editor"
   ],
   "author": "Equan Pr.",
   "license": "MIT",
@@ -34,7 +37,6 @@
     "nedb": "~0.10.0",
     "passport": "~0.2.0",
     "passport-local": "~0.1.6",
-    "rsvp": "~3.0.3",
     "winston": "~0.7.2"
   }
 }
