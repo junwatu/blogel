@@ -11,8 +11,11 @@
     "start": "node blogel.js",
     "build": "npm run copy && npm run build-css && npm run-build-js",
     "build-js": "browserify public/js/blogelweb.js | uglifyjs -mc > public/js/bundle.min.js",
-    "build-css": "sass scss/blogel.scss public/css/blogel.css",
+    "build-css": "npm run sass-to-css && scripts/cat-css.sh | cleancss -o public/css/bundle.min.css",
+    "watch": "echo TODO",
     "watch-css": "onchange scss/blogel.scss -- npm run build-css",
+    "watch-js": "echo TODO",
+    "sass-to-css": "sass scss/blogel.scss public/css/blogel.css",
     "copy": "scripts/copy-assets.sh"
   },
   "keywords": [
@@ -48,6 +51,7 @@
     "winston": "~0.7.2"
   },
   "devDependencies": {
+    "clean-css": "^3.3.6",
     "node-sass": "^3.2.0",
     "onchange": "^1.1.0"
   }
