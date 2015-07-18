@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node blogel.js",
     "build": "npm run copy && npm run build-css && npm run-build-js",
-    "build-js": "uglifyjs public/js/blogelweb.js --source-map public/js/blogelweb.js.map -co public/js/blogelweb.min.js",
+    "build-js": "browserify public/js/blogelweb.js | uglifyjs -mc > public/js/bundle.min.js",
     "build-css": "sass scss/blogel.scss public/css/blogel.css",
     "watch-css": "onchange scss/blogel.scss -- npm run build-css",
     "copy": "scripts/copy-assets.sh"
