@@ -4,5 +4,8 @@
 	},
 	"logger": {
 		"filename": "/logs/blogel.log"
+	},
+	"passport": {
+        "authentication": false
 	}
 }
