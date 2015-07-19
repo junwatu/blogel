@@ -13,7 +13,7 @@
   "os" : [ "darwin", "linux" ],
   "private": true,
   "scripts": {
-    "start": "node blogel.js",
+    "start": "node --harmony --harmony_arrow_functions blogel.js",
     "build": "npm run copy && npm run build-css && npm run-build-js",
     "build-js": "browserify public/js/blogelweb.js | uglifyjs -mc > public/js/bundle.min.js",
     "build-css": "npm run sass-to-css && scripts/cat-css.sh | cleancss -o public/css/bundle.min.css",
