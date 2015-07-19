@@ -2,11 +2,16 @@
   "name": "blogel",
   "version": "0.3.0-alpha",
   "description": "Static page generator with editor",
-  "main": "blogel.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/junwatu/blogel.git"
   },
+  "engines" : { 
+    "node" : ">=0.12.0",
+    "iojs" : ">=2.3.0"
+  },
+  "os" : [ "darwin", "linux" ],
+  "private": true,
   "scripts": {
     "start": "node blogel.js",
     "build": "npm run copy && npm run build-css && npm run-build-js",
@@ -26,8 +31,7 @@
     "static page generator",
     "static page editor"
   ],
-  "author": "Equan Pr.",
-  "license": "MIT",
+  "author": "Equan Pr. <byte@equan.me> (http://equan.me)",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.0.2",
@@ -54,5 +58,6 @@
     "clean-css": "^3.3.6",
     "node-sass": "^3.2.0",
     "onchange": "^1.1.0"
-  }
+  },
+  "license": "MIT"
 }
