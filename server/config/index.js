@@ -1,15 +1,20 @@
+'use babel';
 /**
  *  Using file configuration based on NODE_ENV
+ * 
+ *  The MIT License (MIT)
+ *  Copyright (c) 2015 Equan Pr.
  */
 'use strict';
 var nconf = require('nconf');
-var root = require('../util');
+var root = require('../util').path();
 
 function Config() {
     nconf.argv().env('_');
-    let env = nconf.get('NODE_ENV' || 'development');
-    nconf.file(env, root.path() + '/configuration/' + env + '.json');
-    nconf.file('default', root.path() + '/configuration/development.json');
+    var env = nconf.get('NODE_ENV' || 'development');
+
+    nconf.file(env, `${root}/configuration/${env}.json`);
+    nconf.file('default', `${root}/configuration/development.json`);
 }
 
 Config.prototype.get = (key) => {
