@@ -3,21 +3,21 @@
 # 
 # MIT (c) 2015  Equan Pr.
 
+export TEMP_DIR=./tmp
 set RECURSE_DIR=server
-set TEMP_DIR=.tmp
 set NODE_TRANSPILER=scripts/tools/node-transpiler
 
 transpile_recurse() {
  for i in "$1"/*;do
     if [ -d "$i" ];then
-        if [ ! -d "$TEMP/$i" ] ; then
+        if [ ! -d "$TEMP_DIR/$i" ] ; then
            y=$i
-           mkdir -p "$TEMP/${y#*/}"
+           mkdir -p "$TEMP_DIR/${y#*/}"
         fi
         transpile_recurse "$i"
     elif [ -f "$i" ]; then
         x=$i
-        node "$NODE_TRANSPILER"/bin/transpile "$i" > "$TEMP/${x#*/}"
+        node "$NODE_TRANSPILER"/bin/transpile "$i" > "$TEMP_DIR/${x#*/}"
     fi
  done
 }
