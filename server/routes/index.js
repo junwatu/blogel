@@ -48,7 +48,7 @@ exports.savePost = (req, res) => {
 
     compile(doc).then((status) => {
         res.json({
-            generate: status
+            post: status
         });
     }, (err) => {
         res.json({
