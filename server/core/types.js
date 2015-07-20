@@ -4,8 +4,8 @@
 export type Post = {
     title: string,
     content: string,
-    dateCreated : string,
-    datePublished: string,
+    postCreated : any,
+    postPublished: string,
     lastUpdated: string, 
     status: string
 }
@@ -15,3 +15,11 @@ export type PostCreated = {
     month: string,
     date: string
 }
+
+export type PostDocument = {
+    filename: string,
+    postCreated: PostCreated, 
+    compiledContent: string,
+    post: Post
+}
+
