@@ -14,7 +14,7 @@ transpile_recurse() {
            y=$i
            mkdir -p "$TEMP/${y#*/}"
         fi
-        recurse "$i"
+        transpile_recurse "$i"
     elif [ -f "$i" ]; then
         x=$i
         node "$NODE_TRANSPILER"/bin/transpile "$i" > "$TEMP/${x#*/}"
