@@ -17,7 +17,7 @@ var handlebars = require('handlebars');
 var mkdirp = require('mkdirp');
 var root = require('../util').path();
 var static_folder = `${root}/${STATIC_FOLDER}/`;
-var { genFilename } = require('./helper');
+var { genFilename, cleanHtmlTags } = require('./helper');
 
 import type { Post, PostCreated, PostDocument } from './types.js';
 
@@ -64,9 +64,10 @@ function saveCompiled(data: PostDocument): Promise {
                         reject(err);
                     } else {
                         resolve({
-                            title: postTitle,
+                            title: cleanHtmlTags(postTitle),
                             status: postStatus,
-                            created: pCreated
+                            created: pCreated,
+                            filename: filename
                         });  
                     } 
                 });            
