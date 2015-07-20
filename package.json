@@ -24,7 +24,8 @@
     "start": "node --harmony --harmony_arrow_functions blogel.js",
     "watch": "echo TODO",
     "watch-css": "onchange scss/blogel.scss -- npm run build-css",
-    "watch-js": "echo TODO"
+    "watch-js": "echo TODO",
+    "transpile-all": "scripts/recurse.sh"
   },
   "keywords": [
     "generator",
