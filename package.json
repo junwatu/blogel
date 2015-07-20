@@ -6,33 +6,38 @@
     "type": "git",
     "url": "https://github.com/junwatu/blogel.git"
   },
-  "engines" : { 
-    "node" : ">=0.12.0",
-    "iojs" : ">=2.3.0"
+  "engines": {
+    "iojs": ">=2.3.0",
+    "node": ">=0.12.0"
   },
-  "os" : [ "darwin", "linux" ],
+  "os": [
+    "darwin",
+    "linux"
+  ],
   "private": true,
   "scripts": {
-    "start": "node --harmony --harmony_arrow_functions blogel.js",
     "build": "npm run copy && npm run build-css && npm run-build-js",
-    "build-js": "browserify public/js/blogelweb.js | uglifyjs -mc > public/js/bundle.min.js",
     "build-css": "npm run sass-to-css && scripts/cat-css.sh | cleancss -o public/css/bundle.min.css",
+    "build-js": "browserify public/js/blogelweb.js | uglifyjs -mc > public/js/bundle.min.js",
+    "copy": "scripts/copy-assets.sh",
+    "sass-to-css": "sass scss/blogel.scss public/css/blogel.css",
+    "start": "node --harmony --harmony_arrow_functions blogel.js",
     "watch": "echo TODO",
     "watch-css": "onchange scss/blogel.scss -- npm run build-css",
-    "watch-js": "echo TODO",
-    "sass-to-css": "sass scss/blogel.scss public/css/blogel.css",
-    "copy": "scripts/copy-assets.sh"
+    "watch-js": "echo TODO"
   },
   "keywords": [
-    "static",
-    "page",
-    "static page",
     "generator",
-    "static page generator",
-    "static page editor"
+    "page",
+    "static",
+    "static page",
+    "static page editor",
+    "static page generator"
   ],
   "author": "Equan Pr. <byte@equan.me> (http://equan.me)",
   "dependencies": {
+    "babel-core": "^5.7.4",
+    "babel-runtime": "^5.7.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.0.2",
     "commander": "~2.1.0",
@@ -51,6 +56,7 @@
     "nedb": "~0.10.0",
     "passport": "~0.2.0",
     "passport-local": "~0.1.6",
+    "temp": "^0.8.3",
     "uglify-js": "^2.4.23",
     "winston": "~0.7.2"
   },
