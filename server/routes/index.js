@@ -1,3 +1,4 @@
+'use babel';
 /**
 * Pring App Routes
 *
@@ -7,7 +8,9 @@
 'use strict';
 var app = require('../../package.json');
 var moment = require('moment');
-var { compileData } = require('../core/compile');
+var { compile } = require('../core/compile');
+
+import type { Post, PostCreated } from '../core/types.js';
 
 exports.default = (req, res) => {
     res.render('index', {
@@ -33,16 +36,13 @@ exports.user = (req, res) => {
 }
 
 exports.savePost = (req, res) => {
-    let postDate = new Date();
-    let date_created = {
-        year: postDate.getFullYear(),
-        month: postDate.getMonth(),
-        date: postDate.getDate()
-    };
-    let doc = {
+    // Assume is the new Post
+    let doc:Post = {
         title: req.body.post.title.value,
         content: req.body.post.content.value,
-        postCreated : date_created,
+        postCreated : new Date(),
+        postPublished: '',
+        lastUpdated: new Date(), 
         status: req.body.post.status
     };
 

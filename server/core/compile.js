@@ -19,28 +19,30 @@ var root = require('../util').path();
 var static_folder = `${root}/${STATIC_FOLDER}/`;
 var { genFilename } = require('./helper');
 
-import type { Post, PostCreated } from './types.js';
-
-type PostDocument = {
-    filename: string,
-    postCreated: PostCreated, 
-    compiledContent: string,
-    post: Post
-}
+import type { Post, PostCreated, PostDocument } from './types.js';
 
 function compile(docData:Post): Promise {
     return new Promise((resolve, reject) => {
-        var { title, dateCreated } = docData;
+
+        var { title, postCreated } = docData;
         
         fs.readFile(`${root}/${TEMPLATE_INDEX}`, 'utf-8', (err, data) => {
             var pageBuilder = handlebars.compile(data);
-            var docContent = {
-                filename: `${genFilename(title)}.html`,
-                compiledContent: pageBuilder(docData),
-                dateCreated: dateCreated
+            
+            var dateCreated:PostCreated = {
+                year: postCreated.getFullYear(),
+                month: postCreated.getMonth(),
+                date: postCreated.getDate()
             };
 
-            this.saveCompiled(docContent).then((status) => {
+            var docContent:PostDocument = {
+                filename: `${genFilename(title)}.html`,
+                compiledContent: pageBuilder(docData),
+                postCreated: dateCreated,
+                post: docData
+            };
+
+            saveCompiled(docContent).then((status) => {
                 resolve(status);    
             }, (err) => {
                 reject(err);
@@ -49,19 +51,31 @@ function compile(docData:Post): Promise {
     });
 }
 
-function saveCompiled(data:PostDocument): Promise {
-    var { filename, postCreated: { year: y, month: m, date: d}, compiledContent, post } = data;
-    var postDir = `${static_folder}/${y}/${m}/${d}/${filename}`;
- 
+function saveCompiled(data: PostDocument): Promise {
+    var { filename, postCreated: { year: y, month: m, date: d}, compiledContent, post:{title:postTitle, status: postStatus, postCreated: pCreated}} = data;
+    var postDir = `${static_folder}/${y}/${m}/${d}`;
+    var filepath = `${postDir}/${filename}`;
+
     return new Promise((resolve, reject) => {
         mkdirp(postDir, (err) => {
             if(!err) {
-                fs.writeFile(postDir, compiledContent, (err) => {
-                    (err) ? reject(err) : resolve(post);
+                fs.writeFile(filepath, compiledContent, (err) => {
+                    if(err) { 
+                        reject(err);
+                    } else {
+                        resolve({
+                            title: postTitle,
+                            status: postStatus,
+                            created: pCreated
+                        });  
+                    } 
                 });            
+            } else {
+                console.log(err);
+                return null;
             }
        });
     });
 }
 
-module.exports = { compile, saveCompiled }
+module.exports = { compile, saveCompiled };
