@@ -1,3 +1,6 @@
+'use babel';
+/* @flow */
+
 /**
 * Helper Functions
 *
@@ -7,22 +10,20 @@
 
 'use strict';
 
-// strip html tags
-function cleanHtmlTags(content) {
+function cleanHtmlTags(content: string): string {
     return content.replace(/(<([^>]+)>)/ig, "");
 }
 
-// clean unwanted chars
-function cleanUnwantedChars(content) {
+function cleanUnwantedChars(content: string): string {
     return content.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '');
 }
 
-// generate filename without extension
-function genFilename(htmlString) {
-    let filenema_data = cleanUnwantedChars(cleanHtmlTags(htmlString));
+function genFilename(htmlString: string): string {
+    var filenema_data = cleanUnwantedChars(cleanHtmlTags(htmlString));
     return filenema_data.split(' ').join('-').toLowerCase(); 
 }
 
 module.exports = {
-	genFilename: genFilename
+	genFilename: genFilename,
+	cleanHtmlTags: cleanHtmlTags
 }
