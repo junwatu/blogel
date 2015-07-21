@@ -2,10 +2,9 @@
 # Create temporary directory dan transpile es6 js files.
 # 
 # MIT (c) 2015  Equan Pr.
-
 export TEMP_DIR=./tmp
-set RECURSE_DIR=server
-set NODE_TRANSPILER=scripts/tools/node-transpiler
+export RECURSE_DIR=server
+export NODE_TRANSPILER=scripts/tools/node-transpiler
 
 transpile_recurse() {
  for i in "$1"/*;do
