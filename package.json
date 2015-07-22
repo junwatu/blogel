@@ -22,10 +22,12 @@
     "build-js": "browserify public/js/blogelweb.js | uglifyjs -mc > public/js/bundle.min.js",
     "copy": "scripts/copy-assets.sh",
     "sass-to-css": "sass scss/blogel.scss public/css/blogel.css",
+    "transpile-all": "scripts/recurse.sh",
     "watch": "echo TODO",
     "watch-css": "onchange scss/blogel.scss -- npm run build-css",
     "watch-js": "echo TODO",
-    "transpile-all": "scripts/recurse.sh"
+    "flow-check": "echo 'flow check...' && flow",
+    "watch-flow": "onchange 'server/*.js' 'server/**/*.js' -- npm run flow-check"
   },
   "keywords": [
     "generator",
@@ -57,6 +59,7 @@
     "nedb": "~0.10.0",
     "passport": "~0.2.0",
     "passport-local": "~0.1.6",
+    "rethinkdb": "^2.0.2",
     "temp": "^0.8.3",
     "uglify-js": "^2.4.23",
     "winston": "~0.7.2"
