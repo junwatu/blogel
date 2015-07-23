@@ -12,6 +12,11 @@ export type Post = {
     tags: Array<string>
 }
 
+export type Author = {
+    name: string,
+    email: string
+}
+
 export type PostCreated = {
     year: string,
     month: string,
