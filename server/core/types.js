@@ -7,7 +7,9 @@ export type Post = {
     postCreated : any,
     postPublished: string,
     lastUpdated: string, 
-    status: string
+    status: string,
+    author: string,
+    tags: Array<string>
 }
 
 export type PostCreated = {
@@ -22,4 +24,3 @@ export type PostDocument = {
     compiledContent: string,
     post: Post
 }
-
