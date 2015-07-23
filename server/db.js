@@ -30,21 +30,57 @@ var samplePost:Post = {
     tags: ['hello', 'dummy']
 }
 
-r.connect().then((conn) => {
-    r.dbCreate(DB_NAME).run(conn, (err, created) => {
-        if (err) {
-            console.log(err);  
-        } else {
-            console.log(created);
-            r.db(DB_NAME).tableCreate(POST_TABLE_NAME).run(conn, (err, res) => {
-                if (err) throw err;
-                console.log(res);
-            });
-        }
+// initialize database
+asyncInitDb();
+
+function asyncInitDb(log:boolean = true) {
+    getDbConnection()
+    .then((conn) => {
+        return createDatabase(conn);    
+    })
+    .then( (response) => {
+        return createPostTable(response.conn);
+    })
+    .then( (response) => {
+        return createAuthorsTable(response.conn);
+    })
+    .then( (res) => {
+        console.log(res);
+    })
+    .catch( (err) => {
+        console.log('Unable to connect to rethinkdb');
+        console.log(err.message);
+        process.exit(1);
     });
-}, (err) => {
-    console.log(err);
-});
+}
+
+function createDatabase(conn: any): Promise {
+    return new Promise((resolve, reject) => {
+        r.dbCreate(DB_NAME).run(conn, (err, res) => {
+            err ? reject(err) : resolve({ res: res, conn: conn });
+        })
+    })
+}
+
+function createPostTable(conn: any): Promise {
+    return new Promise((resolve, reject) => {
+         r.db(DB_NAME).tableCreate(POST_TABLE_NAME).run(conn, (err, res) => {
+            err ? reject(err): resolve( { res: res, conn: conn });
+         })
+    })
+}
+
+function createAuthorsTable(conn: any): Promise {
+    return new Promise((resolve, reject) => {
+        r.db(DB_NAME).tableCreate(AUTHORS_TABLE_NAME).run(conn, (err, res) => {
+            err ? reject(err) : resolve({ res: res, conn: conn });
+        })
+    })
+}
+
+function getDbConnection(): Promise {
+    return r.connect(options);
+}
 
 function getAllPost(): Array<Post> {
     var allPost:Array<Post> = [samplePost, samplePost];
@@ -80,6 +116,9 @@ module.exports = {
 	POST_TABLE_NAME,
 	AUTHORS_TABLE_NAME,
     getDbConnection,
+    getAllPost,
+    getPostById,
+    getPostByAuthor,
     savePost,
     updatePost,
     deletePost
