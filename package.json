@@ -17,6 +17,7 @@
   "private": true,
   "scripts": {
     "start": "node --harmony --harmony_arrow_functions blogel.js --use-babel",
+    "dev": "npm run transpile-all && npm start",
     "build": "npm run copy && npm run build-css && npm run-build-js",
     "build-css": "npm run sass-to-css && scripts/cat-css.sh | cleancss -o public/css/bundle.min.css",
     "build-js": "browserify public/js/blogelweb.js | uglifyjs -mc > public/js/bundle.min.js",
