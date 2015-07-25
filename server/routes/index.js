@@ -1,4 +1,6 @@
 'use babel';
+/* @flow */
+
 /**
 * Pring App Routes
 *
@@ -6,11 +8,12 @@
 * Copyright (c) 2015 Equan Pr.
 */
 'use strict';
-var app = require('../../package.json');
 var moment = require('moment');
-var { compile } = require('../core/compile');
+var app = require('../../package.json');
 
 import type { Post, PostCreated } from '../core/types.js';
+import { compile } from '../core/compile';
+import { savePost } from '../db.js';
 
 exports.default = (req, res) => {
     res.render('index', {
@@ -36,25 +39,31 @@ exports.user = (req, res) => {
 }
 
 exports.savePost = (req, res) => {
-    // Assume is the new Post
-    let doc:Post = {
+    let doc: Post = {
         title: req.body.post.title.value,
         content: req.body.post.content.value,
         postCreated : new Date(),
         postPublished: '',
         lastUpdated: new Date(), 
-        status: req.body.post.status
+        status: req.body.post.status,
+        author: '',
+        tags: ['hello', 'world']
     };
-
-    compile(doc).then((status) => {
-        res.json({
-            post: status
-        });
-    }, (err) => {
-        res.json({
-            error: err
+    
+    savePost(doc).then((result) => {
+        compile(doc).then((status) => {
+            var jsonOut = {
+                post: status,
+                id: result.generated_keys
+            }
+            res.json(jsonOut);
+        }, (err) => {
+            res.json({ error: err });
         })
+    }, (err) => {
+        res.json({ error: err });
     });
+        
 }
 
 exports.api = (req, res) => {
