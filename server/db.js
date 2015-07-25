@@ -42,16 +42,16 @@ function asyncInitDb(log:boolean = true) {
             return p(status.conn);
         })
         .then( (response) => {
-            postTableIsExist(response.conn).then((status) => {
+            isTableExist(POST_TABLE_NAME, response.conn).then((status) => {
                 if(!status.exist) {
-                    return createPostTable(status.conn);        
+                    return createTable(POST_TABLE_NAME, status.conn);        
                 }
                 return p(status.conn)
             })
             .then( (response) => {
-                authorsTableIsExist(response.conn).then((status) => {
+                isTableExist(AUTHORS_TABLE_NAME, response.conn).then((status) => {
                     if(!status.exist) {
-                        return createAuthorsTable(response.conn);        
+                        return createTable(AUTHORS_TABLE_NAME, status.conn);        
                     }
                     return p(status.conn);
                 })
@@ -91,40 +91,22 @@ function dbIsExist(conn: any): Promise {
     });
 }
 
-function postTableIsExist(conn: any): Promise {
+function isTableExist(tableName: string, conn: any): Promise {
     return new Promise( (resolve, reject) => {
-        r.db(DB_NAME).tableList().run(conn, (err, table) => {
-            if(err) {
-                reject(err);
-            } else { 
-                var post: boolean = false;
-                table.forEach( (v,i,a) => {
-                    if(v === POST_TABLE_NAME) {
-                        post = true;
-                    }
-                })
-                post ? resolve({ exist:true, conn:conn}): resolve({ exist:false, conn:conn});
-            }
-        });
-    });   
-}
-
-function authorsTableIsExist(conn: any): Promise {
-    return new Promise((resolve, reject) => {
         r.db(DB_NAME).tableList().run(conn, (err,table) => {
             if(err) {
                 reject(err);
             } else { 
-                var author: boolean = false;
+                var _tableName: boolean = false;
                 table.forEach((v,i,a) => {
-                    if(v === AUTHORS_TABLE_NAME) {
-                        author = true;
+                    if(v === tableName) {
+                        _tableName = true;
                     }
                 })
-                author ? resolve({ exist:true, conn:conn}) : resolve({ exist:false, conn:conn});
+                _tableName ? resolve({ exist:true, conn:conn}) : resolve({ exist:false, conn:conn});
             }
         });
-    });   
+    });
 }
 
 function createDatabase(conn: any): Promise {
@@ -135,20 +117,12 @@ function createDatabase(conn: any): Promise {
     })
 }
 
-function createPostTable(conn: any): Promise {
+function createTable(tableName: string, conn: any): Promise {
     return new Promise((resolve, reject) => {
-         r.db(DB_NAME).tableCreate(POST_TABLE_NAME).run(conn, (err, res) => {
-            err ? reject(err): resolve( { res: res, conn: conn });
-         })
-    })
-}
-
-function createAuthorsTable(conn: any): Promise {
-    return new Promise((resolve, reject) => {
-        r.db(DB_NAME).tableCreate(AUTHORS_TABLE_NAME).run(conn, (err, res) => {
+        r.db(DB_NAME).tableCreate(tableName).run(conn, (err, res) => {
             err ? reject(err) : resolve({ res: res, conn: conn });
         })
-    })
+    })   
 }
 
 function getDbConnection(): Promise {
