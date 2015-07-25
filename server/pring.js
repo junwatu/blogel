@@ -50,4 +50,8 @@ pring.listen(config.get('express:port'), () => {
     Logger.info(msg);
 });
 
+process.on('unhandledRejection', function (err, p) {
+  console.error(err.stack)
+});
+
 module.exports = pring;
