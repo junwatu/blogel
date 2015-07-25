@@ -60,8 +60,6 @@ function saveCompiled(data: PostDocument): Promise {
     return new Promise((resolve, reject) => {
         mkdirp(postDir, (err) => {
             if(!err) {
-                // Always save post. TESTING ONLY
-                saveToDatabase(post);
                 var { title: postTitle, status: postStatus, postCreated: pCreated } = post;
                 
                 fs.writeFile(filepath, compiledContent, (err) => {
@@ -81,15 +79,6 @@ function saveCompiled(data: PostDocument): Promise {
                 return null;
             }
        });
-    });
-}
-
-function saveToDatabase(post: Post) {
-    console.log(post);
-    getDbConnection().then((conn) => {
-            
-    }, (err) => {
-        console.log(err);
     });
 }
 
