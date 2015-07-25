@@ -57,6 +57,9 @@ function asyncInitDb(log:boolean = true) {
                 })
                 .then( (res) => {
                     console.log('Database Ok');
+                    res.conn.close((err) => {
+                        if(err) console.log(err) ;
+                    });
                 })
                 .catch( (err) => {
                     console.log(err.message);
@@ -129,6 +132,16 @@ function getDbConnection(): Promise {
     return r.connect(options);
 }
 
+function savePost(post:Post): Promise {
+    return new Promise((resolve, reject) => {
+        getDbConnection().then((conn) => {
+            r.db(DB_NAME).table(POST_TABLE_NAME).insert(post).run(conn, function(err, result){
+                err ? reject(err) : resolve(result);
+            });    
+        })                            
+    })                                                                                                                              
+}
+
 function getAllPost(): Array<Post> {
     var allPost:Array<Post> = [samplePost, samplePost];
     return allPost;
@@ -141,12 +154,6 @@ function getPostById(id:string): Post {
 function getPostByAuthor(authorId: string): Array<Post> {
     var postsByAuthor: Array<Post> = [samplePost, samplePost];
     return postsByAuthor;
-}
-
-function savePost(post:Post): boolean {
-    var savePostStatus: boolean = true;
-    r.db(DB_NAME).table(POST_TABLE_NAME).run();                                                                                                                                                             
-    return savePostStatus;
 }
 
 function updatePost(post:Post): number {
