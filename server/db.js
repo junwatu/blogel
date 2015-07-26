@@ -10,7 +10,7 @@
 'use strict';
 
 var DB_NAME = 'blogel';
-var POST_TABLE_NAME = 'post';
+var POST_TABLE_NAME = 'posts';
 var AUTHORS_TABLE_NAME = 'authors';
 
 var r = require('rethinkdb');
@@ -167,9 +167,9 @@ function deletePost(id:string): number {
 }
 
 module.exports = {
-	DB_NAME,
-	POST_TABLE_NAME,
-	AUTHORS_TABLE_NAME,
+    DB_NAME,
+    POST_TABLE_NAME,
+    AUTHORS_TABLE_NAME,
     getDbConnection,
     getAllPost,
     getPostById,
