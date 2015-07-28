@@ -16,19 +16,19 @@
   ],
   "private": true,
   "scripts": {
-    "start": "node --harmony --harmony_arrow_functions blogel.js --use-babel",
-    "dev": "npm run transpile-all && npm start",
     "build": "npm run copy && npm run build-css && npm run-build-js",
     "build-css": "npm run sass-to-css && scripts/cat-css.sh | cleancss -o public/css/bundle.min.css",
     "build-js": "browserify public/js/blogelweb.js | uglifyjs -mc > public/js/bundle.min.js",
     "copy": "scripts/copy-assets.sh",
+    "dev": "npm run transpile-all && npm start",
+    "flow-check": "echo 'flow check...' && flow",
     "sass-to-css": "sass scss/blogel.scss public/css/blogel.css",
+    "start": "node --harmony --harmony_arrow_functions blogel.js --use-babel",
     "transpile-all": "scripts/recurse.sh",
     "watch": "echo TODO",
     "watch-css": "onchange scss/blogel.scss -- npm run build-css",
-    "watch-js": "echo TODO",
-    "flow-check": "echo 'flow check...' && flow",
-    "watch-flow": "onchange 'server/*.js' 'server/**/*.js' -- npm run flow-check"
+    "watch-flow": "onchange 'server/*.js' 'server/**/*.js' -- npm run flow-check",
+    "watch-js": "echo TODO"
   },
   "keywords": [
     "generator",
@@ -67,8 +67,10 @@
   },
   "devDependencies": {
     "clean-css": "^3.3.6",
+    "mocha": "^2.2.5",
     "node-sass": "^3.2.0",
-    "onchange": "^1.1.0"
+    "onchange": "^1.1.0",
+    "uglifyjs": "^2.4.10"
   },
   "license": "MIT"
 }
