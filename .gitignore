@@ -5,3 +5,4 @@ node_modules
 .babel-cache
 tmp
 rethinkdb_data
+*.swp
