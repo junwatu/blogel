@@ -56,7 +56,7 @@ function asyncInitDb(log:boolean = true) {
                     return p(status.conn);
                 })
                 .then( (res) => {
-                    console.log('Database Ok');
+                    //console.log('Database Ok');
                     res.conn.close((err) => {
                         if(err) console.log(err) ;
                     });
@@ -163,15 +163,22 @@ function getPostByAuthor(authorId: string): Array<Post> {
     return postsByAuthor;
 }
 
-function updatePost(post:Post): number {
-    var recordUpdated: number = 1;
-    return recordUpdated;
-}
 
-function deletePost(id:string): number {
+function updatePost(post:Post): Promise {
+    
     return new Promise((resolve, reject) => {
         getDbConnection().then((conn) => {
-	    r.db(DB_NAME).table(POST_TABLE_NAME).get(id).delete().run(conn, function(err, result){
+	    r.db(DB_NAME).table(POST_TABLE_NAME).get(post.generated_keys[0]).update(post).run(conn, (err, status) => {
+	        err ? reject(err) : resolve(status);
+	    })
+	})    
+    });
+}
+
+function deletePost(id:string): Promise {
+    return new Promise((resolve, reject) => {
+        getDbConnection().then((conn) => {
+	    r.db(DB_NAME).table(POST_TABLE_NAME).get(id).delete().run(conn, (err, result) => {
 	        err ? reject(err) : resolve(result);
 	    });    	
 	})
