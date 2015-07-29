@@ -169,8 +169,13 @@ function updatePost(post:Post): number {
 }
 
 function deletePost(id:string): number {
-    var recordDeleted: number = 1;
-    return recordDeleted;
+    return new Promise((resolve, reject) => {
+        getDbConnection().then((conn) => {
+	    r.db(DB_NAME).table(POST_TABLE_NAME).get(id).delete().run(conn, function(err, result){
+	        err ? reject(err) : resolve(result);
+	    });    	
+	})
+    }) 
 }
 
 module.exports = {
