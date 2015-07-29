@@ -14,6 +14,18 @@ var post = {
     tags: ['hello', 'dummy']
 };
 
+var post_update = {
+    title: 'LRC Network',
+    content: 'Inductor, Resisto & Capacitor Network',
+    //postCreated : new Date(),
+    postPublished: new Date(),
+    lastUpdated: '22-07-2015', 
+    status: 'published',
+    // should be author id: string
+    author: 'Maheso Anabrang',
+    tags: ['hello', 'dummy', 'electronic']
+}
+
 var post_id;
 
 describe('Blogel Database Test', function(){
@@ -38,6 +50,19 @@ describe('Blogel Database Test', function(){
           done(err);
        });   
     });
+
+    it('Should update post', function(){
+       
+       post_update.generated_keys = [post_id];
+
+       db.updatePost(post_update).then(function(data){
+           //console.log(data);
+           assert.equal(1, data.replaced, 'replaced (updated) should be 1');
+	   done();
+       }, function(err){
+           done(err);
+       });
+    })
 
     it('Should delete post with specified id', function(done){
        db.deletePost(post_id).then(function(result){
