@@ -28,7 +28,8 @@
     "watch": "echo TODO",
     "watch-css": "onchange scss/blogel.scss -- npm run build-css",
     "watch-flow": "onchange 'server/*.js' 'server/**/*.js' -- npm run flow-check",
-    "watch-js": "echo TODO"
+    "watch-js": "echo TODO",
+    "test": "npm run transpile-all && mocha test/*.spec.js"
   },
   "keywords": [
     "generator",
