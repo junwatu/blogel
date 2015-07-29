@@ -144,11 +144,18 @@ function savePost(post:Post): Promise {
 
 function getAllPost(): Array<Post> {
     var allPost:Array<Post> = [samplePost, samplePost];
+    
     return allPost;
 }
 
-function getPostById(id:string): Post {
-    return samplePost;
+function getPostById(id:string): Promise {
+    return new	Promise((resolve, reject) => {
+        getDbConnection().then((conn) => {
+	    r.db(DB_NAME).table(POST_TABLE_NAME).get(id).run(conn, function(err, result){
+	        err ? reject(err) : resolve(result);
+	    })
+	})
+    });
 }
 
 function getPostByAuthor(authorId: string): Array<Post> {
