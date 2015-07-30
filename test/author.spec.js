@@ -35,12 +35,12 @@ describe('Author Table Test', function(){
           done(err);
        });   
     });
-/**
-    it('Should update post', function(){
-       
-       post_update.generated_keys = [post_id];
 
-       db.updatePost(post_update).then(function(data){
+    it('Should update author data', function(){
+       
+       author_update.generated_keys = [author_id];
+
+       db.updateAuthor(author_update).then(function(data){
            //console.log(data);
            assert.equal(1, data.replaced, 'replaced (updated) should be 1');
 	   done();
@@ -48,7 +48,6 @@ describe('Author Table Test', function(){
            done(err);
        });
     })
-*/
 
     it('Should delete author with specified id', function(done){
        db.deleteAuthor(author_id).then(function(result){
