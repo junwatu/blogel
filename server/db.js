@@ -200,11 +200,18 @@ function deleteAuthor(id: string): Promise {
     });
 }
 
-/**
-function getAuthorById(id: string): Promise {
 
+function getAuthorById(id: string): Promise {
+    return new Promise((resolve, reject) => {
+        getDbConnection().then((conn) => {
+	   r.db(DB_NAME).table(AUTHORS_TABLE_NAME).get(id).run(conn, (err, result) => {
+	       err ? reject(err) : resolve(result);
+	   })
+	})
+    })
 }
 
+/**
 function updateAuthor(author: Author): Promise {
 
 }
@@ -228,5 +235,7 @@ module.exports = {
     updatePost,
     deletePost,
     saveAuthor,
-    deleteAuthor	    
+    deleteAuthor,
+    getAuthorById,
+   //updateAuthor
 }       																																																															
