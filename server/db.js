@@ -211,11 +211,15 @@ function getAuthorById(id: string): Promise {
     })
 }
 
-/**
 function updateAuthor(author: Author): Promise {
-
+    return new Promise((resolve, reject) => {
+        getDbConnection().then((conn) => {
+	    r.db(DB_NAME).table(AUTHORS_TABLE_NAME).get(author.generated_keys[0]).update(author).run(conn, (err, result) => {
+	        err ? reject(err) : resolve(result);
+	    })
+	})
+    })
 }
-*/
 
 function getPostByAuthor(authorId: string): Array<Post> {
     var postsByAuthor: Array<Post> = [samplePost, samplePost];
@@ -237,5 +241,5 @@ module.exports = {
     saveAuthor,
     deleteAuthor,
     getAuthorById,
-   //updateAuthor
+    updateAuthor
 }       																																																															
