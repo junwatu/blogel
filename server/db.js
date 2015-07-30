@@ -135,7 +135,7 @@ function getDbConnection(): Promise {
 function savePost(post:Post): Promise {
     return new Promise((resolve, reject) => {
         getDbConnection().then((conn) => {
-            r.db(DB_NAME).table(POST_TABLE_NAME).insert(post).run(conn, function(err, result){
+            r.db(DB_NAME).table(POST_TABLE_NAME).insert(post).run(conn, (err, result) => {
                 err ? reject(err) : resolve(result);
             });    
         })                            
@@ -158,12 +158,6 @@ function getPostById(id:string): Promise {
     });
 }
 
-function getPostByAuthor(authorId: string): Array<Post> {
-    var postsByAuthor: Array<Post> = [samplePost, samplePost];
-    return postsByAuthor;
-}
-
-
 function updatePost(post:Post): Promise {
     
     return new Promise((resolve, reject) => {
@@ -185,6 +179,43 @@ function deletePost(id:string): Promise {
     }) 
 }
 
+
+function saveAuthor(author: Author): Promise {
+    return new Promise((resolve, reject) => {
+        getDbConnection().then((conn) => {
+	    r.db(DB_NAME).table(AUTHORS_TABLE_NAME).insert(author).run(conn, (err, result) => {
+	      err ? reject(err) : resolve(result);
+	    })
+	})       
+    })    
+}
+
+function deleteAuthor(id: string): Promise {
+    return new Promise((resolve, reject) => {
+        getDbConnection().then((conn) => {
+	    r.db(DB_NAME).table(AUTHORS_TABLE_NAME).get(id).delete().run(conn, (err, result) => {
+	       err ? reject(err) : resolve(result);
+	    })
+	})
+    });
+}
+
+/**
+function getAuthorById(id: string): Promise {
+
+}
+
+function updateAuthor(author: Author): Promise {
+
+}
+*/
+
+function getPostByAuthor(authorId: string): Array<Post> {
+    var postsByAuthor: Array<Post> = [samplePost, samplePost];
+    return postsByAuthor;
+}
+
+
 module.exports = {
     DB_NAME,
     POST_TABLE_NAME,
@@ -195,5 +226,7 @@ module.exports = {
     getPostByAuthor,
     savePost,
     updatePost,
-    deletePost
+    deletePost,
+    saveAuthor,
+    deleteAuthor	    
 }       																																																															
