@@ -25,18 +25,17 @@ describe('Author Table Test', function(){
            done(err);
        });
     })
-/*
-    it('Should get post data base on id', function(done){
-       db.getPostById(post_id).then(function(data){
-	  //console.log('Get Post:');
+
+    it('Should get author data based on id', function(done){
+       db.getAuthorById(author_id).then(function(data) {
           //console.log(data);
-          assert.equal(data.title,post.title, 'post title should be '+post.title);
+          assert.equal(data.name,author.name, 'Author name ');
 	  done();
        }, function(err){
           done(err);
        });   
     });
-
+/**
     it('Should update post', function(){
        
        post_update.generated_keys = [post_id];
