@@ -1,12 +1,6 @@
-'use babel';
 /* @flow */
+'use babel';
 
-/**
-* Compile Data With Template
-*
-* The MIT License (MIT)
-* Copyright (c) 2014 Equan Pr.
-*/
 'use strict';
 
 var TEMPLATE_INDEX = 'template/index.hbs';
@@ -26,10 +20,10 @@ function compile(docData:Post): Promise {
     return new Promise((resolve, reject) => {
 
         var { title, postCreated } = docData;
-        
+
         fs.readFile(`${root}/${TEMPLATE_INDEX}`, 'utf-8', (err, data) => {
             var pageBuilder = handlebars.compile(data);
-            
+
             var dateCreated:PostCreated = {
                 year: postCreated.getFullYear(),
                 month: postCreated.getMonth(),
@@ -44,10 +38,10 @@ function compile(docData:Post): Promise {
             };
 
             saveCompiled(docContent).then((status) => {
-                resolve(status);    
+                resolve(status);
             }, (err) => {
                 reject(err);
-            }) 
+            })
         });
     });
 }
@@ -61,9 +55,9 @@ function saveCompiled(data: PostDocument): Promise {
         mkdirp(postDir, (err) => {
             if(!err) {
                 var { title: postTitle, status: postStatus, postCreated: pCreated } = post;
-                
+
                 fs.writeFile(filepath, compiledContent, (err) => {
-                    if(err) { 
+                    if(err) {
                         reject(err);
                     } else {
                         resolve({
@@ -71,9 +65,9 @@ function saveCompiled(data: PostDocument): Promise {
                             status: postStatus,
                             created: pCreated,
                             filename: filename
-                        });  
-                    } 
-                });            
+                        });
+                    }
+                });
             } else {
                 console.log(err);
                 return null;

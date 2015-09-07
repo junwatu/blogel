@@ -1,10 +1,5 @@
-/**
-* Passport Auth
-*
-* The MIT License (MIT)
-* Copyright (c) 2014 Equan Pr.
-*/
 'use strict';
+
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('../../models/user');
 var util = require('util');
@@ -20,10 +15,6 @@ module.exports = (passport) => {
         })
     });
 
-    /**+++++++++++
-     *   SignUp
-     *++++++++++++
-     */
     let localSignupStrategy = new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password',
@@ -55,10 +46,6 @@ module.exports = (passport) => {
 
     passport.use('local-signup', localSignupStrategy);
 
-    /**++++++++++
-     *   Login
-     *+++++++++++
-     */
     let optionsLocal = {
         usernameField: 'email',
         passwordField: 'password',

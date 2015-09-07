@@ -6,7 +6,7 @@ export type Post = {
     content: string,
     postCreated : any,
     postPublished: string,
-    lastUpdated: string, 
+    lastUpdated: string,
     status: string,
     author: string,
     tags: Array<string>
@@ -14,7 +14,10 @@ export type Post = {
 
 export type Author = {
     name: string,
-    email: string
+    email: string,
+    username: string,
+    password: string,
+    token: string
 }
 
 export type PostCreated = {
@@ -25,7 +28,7 @@ export type PostCreated = {
 
 export type PostDocument = {
     filename: string,
-    postCreated: PostCreated, 
+    postCreated: PostCreated,
     compiledContent: string,
     post: Post
 }

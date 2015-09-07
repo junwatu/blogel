@@ -1,10 +1,5 @@
 'use babel';
-/**
- *  Using file configuration based on NODE_ENV
- * 
- *  The MIT License (MIT)
- *  Copyright (c) 2015 Equan Pr.
- */
+
 'use strict';
 var nconf = require('nconf');
 var root = require('../util').path();

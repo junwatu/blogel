@@ -6,3 +6,4 @@ node_modules
 tmp
 rethinkdb_data
 *.swp
+todo

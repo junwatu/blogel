@@ -1,4 +1,3 @@
-// Author Test File
 var db = require('../tmp/db.js');
 var assert = require('assert');
 
@@ -18,32 +17,27 @@ describe('Author Table Test', function(){
 
     it('Should save new author', function(done){
        db.saveAuthor(author).then(function(status){
-           //console.log(status);
-	   author_id = status.generated_keys[0];
-	   done();    
-       }, function(err){     
+	         author_id = status.generated_keys[0];
+	         done();
+       }, function(err){
            done(err);
        });
     })
 
     it('Should get author data based on id', function(done){
        db.getAuthorById(author_id).then(function(data) {
-          //console.log(data);
           assert.equal(data.name,author.name, 'Author name ');
-	  done();
+	        done();
        }, function(err){
           done(err);
-       });   
+       });
     });
 
     it('Should update author data', function(){
-       
        author_update.generated_keys = [author_id];
-
-       db.updateAuthor(author_update).then(function(data){
-           //console.log(data);
+           db.updateAuthor(author_update).then(function(data){
            assert.equal(1, data.replaced, 'replaced (updated) should be 1');
-	   done();
+	         done();
        }, function(err){
            done(err);
        });
@@ -51,9 +45,8 @@ describe('Author Table Test', function(){
 
     it('Should delete author with specified id', function(done){
        db.deleteAuthor(author_id).then(function(result){
-           //console.log(result);
-	   assert.equal(1, result.deleted, 'deleted should be 1');
-	   done();
+	       assert.equal(1, result.deleted, 'deleted should be 1');
+	       done();
        }, function(err){
            done(err);
        })

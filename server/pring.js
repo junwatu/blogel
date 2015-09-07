@@ -1,11 +1,7 @@
 'use babel';
-/**
-* Pring App Server
-*
-* The MIT License (MIT)
-* Copyright (c) 2014 Equan Pr.
-*/
+
 'use strict';
+
 var express = require('express');
 var pring = express();
 var config = require('./config');
@@ -25,11 +21,11 @@ require('./middleware/auth/passport')(passport);
 
 pring.use(bodyParser.urlencoded({extended: true}));
 pring.use(bodyParser.json());
-pring.use(cookieParser()); 
+pring.use(cookieParser());
 pring.use(methodOverride());
 
 pring.use(session({
-	secret:'pagedekisasimplestaticgenerator', 
+	secret:'pagedekisasimplestaticgenerator',
 	resave: true,
 	saveUninitialized: true
 }));

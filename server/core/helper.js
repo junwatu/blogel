@@ -1,12 +1,5 @@
-'use babel';
 /* @flow */
-
-/**
-* Helper Functions
-*
-* The MIT License (MIT)
-* Copyright (c) 2014 Equan Pr.
-*/
+'use babel';
 
 'use strict';
 
@@ -20,10 +13,10 @@ function cleanUnwantedChars(content: string): string {
 
 function genFilename(htmlString: string): string {
     var filenema_data = cleanUnwantedChars(cleanHtmlTags(htmlString));
-    return filenema_data.split(' ').join('-').toLowerCase(); 
+    return filenema_data.split(' ').join('-').toLowerCase();
 }
 
 module.exports = {
-	genFilename: genFilename,
-	cleanHtmlTags: cleanHtmlTags
+	  genFilename: genFilename,
+	  cleanHtmlTags: cleanHtmlTags
 }

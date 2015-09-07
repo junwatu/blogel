@@ -1,11 +1,6 @@
-/**
-* Post Model
-*
-* The MIT License (MIT)
-* Copyright (c) 2014 Equan Pr.
-*/
 'use strict';
-var database = require('../middleware/db');
+
+var database = require('../db');
 
 function Lembar(doc){
 	for(let key in doc){
@@ -14,11 +9,3 @@ function Lembar(doc){
 }
 
 module.exports = Lembar;
-
-
-
-
-
-
-
-

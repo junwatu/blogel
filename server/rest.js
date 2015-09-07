@@ -1,9 +1,3 @@
-/**
-* REST API
-*
-* The MIT License (MIT)
-* Copyright (c) 2014 Equan Pr.
-*/
 'use strict';
 
 var routes = require('./routes');
@@ -11,12 +5,12 @@ var config = require('./config');
 
 function isLoggedin(req, res, next) {
     if(req.isAuthenticated()) return next();
-    res.redirect('/');    
+    res.redirect('/');
 }
 
 module.exports = (pring, passport) => {
     if(config.get('passport:authentication')){
-       pring.get('/', routes.default); 
+       pring.get('/', routes.default);
     } else {
        pring.get('/', routes.user);
     }
@@ -35,7 +29,7 @@ module.exports = (pring, passport) => {
     pring.post('/signup', passport.authenticate('local-signup', {
     	successRedirect : '/user',
 		failureRedirect : '/signup',
-		failureFlash : true 
+		failureFlash : true
     }));
     pring.get('/signup', routes.signupPage);
     pring.get('/logout', routes.logout);

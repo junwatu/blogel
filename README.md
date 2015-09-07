@@ -1,7 +1,7 @@
 Blogel
 =======
 
-Another static page generator but simpler and spesific. I built it for fun and to generate my static blog pages on [http://equan.me](http://equan.me) :smile:. 
+Another static page generator but simpler and spesific. I built it for fun and to generate my static blog pages on [http://equan.me](http://equan.me) :smile:.
 
 The workflow is simple just like when you are blogging, writing page via web editor and then save it as draft or just publish it on cloud or github. When you publishing page Blogel will generate it as static page and then upload it on cloud or github.
 
@@ -18,17 +18,21 @@ The workflow is simple just like when you are blogging, writing page via web edi
 ###Install
 
     $ npm install blogel
-    
+
 ###Usage
+
+Start rethinkdb
+
+    $ rethinkdb
 
 Start the server
 
     $ npm start
-	
-Open the browser 
+
+Open the browser
 
     http://localhost:5555
-    
+
 Write and post it :octopus:
 
 ###Screenshot
@@ -63,4 +67,3 @@ FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-

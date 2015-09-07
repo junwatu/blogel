@@ -1,12 +1,6 @@
-'use babel';
 /* @flow */
+'use babel';
 
-/**
-* Pring App Routes
-*
-* The MIT License (MIT)
-* Copyright (c) 2015 Equan Pr.
-*/
 'use strict';
 var moment = require('moment');
 var app = require('../../package.json');
@@ -24,7 +18,7 @@ exports.default = (req, res) => {
 
 exports.user = (req, res) => {
 
-    // TODO : get the latest draft or published post
+    //TODO : get the latest draft or published post
 
     res.render('edit', {
         "title": app.name,
@@ -44,12 +38,12 @@ exports.savePost = (req, res) => {
         content: req.body.post.content.value,
         postCreated : new Date(),
         postPublished: '',
-        lastUpdated: new Date(), 
+        lastUpdated: new Date(),
         status: req.body.post.status,
         author: '',
         tags: ['hello', 'world']
     };
-    
+
     savePost(doc).then((result) => {
         compile(doc).then((status) => {
             var jsonOut = {
@@ -63,7 +57,7 @@ exports.savePost = (req, res) => {
     }, (err) => {
         res.json({ error: err });
     });
-        
+
 }
 
 exports.api = (req, res) => {

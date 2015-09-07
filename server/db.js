@@ -1,12 +1,6 @@
-'use babel';
 /* @flow */
+'use babel';
 
-/**
-* RethinkDB API
-*  
-* The MIT License (MIT)
-* Copyright (c) 2015 Equan Pr.
-*/
 'use strict';
 
 var DB_NAME = 'blogel';
@@ -15,7 +9,7 @@ var AUTHORS_TABLE_NAME = 'authors';
 
 var r = require('rethinkdb');
 var root = require('./util').path();
-var options = { host: 'localhost', port: 28015, authkey:'', db:DB_NAME}; 
+var options = { host: 'localhost', port: 28015, authkey:'', db:DB_NAME};
 
 import type { Post, Author } from './core/types.js';
 
@@ -24,7 +18,7 @@ var samplePost:Post = {
     content: 'Hello, World!',
     postCreated : new Date(),
     postPublished: '22-07-2015',
-    lastUpdated: '22-07-2015', 
+    lastUpdated: '22-07-2015',
     status: 'draft',
     author: 'Maheso Anabrang',
     tags: ['hello', 'dummy']
@@ -44,19 +38,18 @@ function asyncInitDb(log:boolean = true) {
         .then( (response) => {
             isTableExist(POST_TABLE_NAME, response.conn).then((status) => {
                 if(!status.exist) {
-                    return createTable(POST_TABLE_NAME, status.conn);        
+                    return createTable(POST_TABLE_NAME, status.conn);
                 }
                 return p(status.conn)
             })
             .then( (response) => {
                 isTableExist(AUTHORS_TABLE_NAME, response.conn).then((status) => {
                     if(!status.exist) {
-                        return createTable(AUTHORS_TABLE_NAME, status.conn);        
+                        return createTable(AUTHORS_TABLE_NAME, status.conn);
                     }
                     return p(status.conn);
                 })
                 .then( (res) => {
-                    //console.log('Database Ok');
                     res.conn.close((err) => {
                         if(err) console.log(err) ;
                     });
@@ -99,7 +92,7 @@ function isTableExist(tableName: string, conn: any): Promise {
         r.db(DB_NAME).tableList().run(conn, (err,table) => {
             if(err) {
                 reject(err);
-            } else { 
+            } else {
                 var _tableName: boolean = false;
                 table.forEach((v,i,a) => {
                     if(v === tableName) {
@@ -125,7 +118,7 @@ function createTable(tableName: string, conn: any): Promise {
         r.db(DB_NAME).tableCreate(tableName).run(conn, (err, res) => {
             err ? reject(err) : resolve({ res: res, conn: conn });
         })
-    })   
+    })
 }
 
 function getDbConnection(): Promise {
@@ -137,14 +130,14 @@ function savePost(post:Post): Promise {
         getDbConnection().then((conn) => {
             r.db(DB_NAME).table(POST_TABLE_NAME).insert(post).run(conn, (err, result) => {
                 err ? reject(err) : resolve(result);
-            });    
-        })                            
-    })                                                                                                                              
+            });
+        })
+    })
 }
 
 function getAllPost(): Array<Post> {
     var allPost:Array<Post> = [samplePost, samplePost];
-    
+
     return allPost;
 }
 
@@ -159,13 +152,13 @@ function getPostById(id:string): Promise {
 }
 
 function updatePost(post:Post): Promise {
-    
+
     return new Promise((resolve, reject) => {
         getDbConnection().then((conn) => {
 	    r.db(DB_NAME).table(POST_TABLE_NAME).get(post.generated_keys[0]).update(post).run(conn, (err, status) => {
 	        err ? reject(err) : resolve(status);
 	    })
-	})    
+	})
     });
 }
 
@@ -174,9 +167,9 @@ function deletePost(id:string): Promise {
         getDbConnection().then((conn) => {
 	    r.db(DB_NAME).table(POST_TABLE_NAME).get(id).delete().run(conn, (err, result) => {
 	        err ? reject(err) : resolve(result);
-	    });    	
+	    });
 	})
-    }) 
+    })
 }
 
 
@@ -186,8 +179,8 @@ function saveAuthor(author: Author): Promise {
 	    r.db(DB_NAME).table(AUTHORS_TABLE_NAME).insert(author).run(conn, (err, result) => {
 	      err ? reject(err) : resolve(result);
 	    })
-	})       
-    })    
+	})
+    })
 }
 
 function deleteAuthor(id: string): Promise {
@@ -242,4 +235,4 @@ module.exports = {
     deleteAuthor,
     getAuthorById,
     updateAuthor
-}       																																																															
+}

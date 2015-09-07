@@ -1,11 +1,8 @@
-/**
-* User Model
-* 
-* The MIT License (MIT)
-* Copyright (c) 2014 Equan Pr.
-*/
-"use strict";
-var db = require('../middleware/db');
+'use babel';
+
+'use strict';
+
+var db = require('../../db');
 var bcrypt = require('bcrypt-nodejs');
 var sendto = require('../logger');
 var Logger = require('../logger').Logger;
@@ -16,6 +13,8 @@ function User(user) {
         this[key] = user[key];
     }
 };
+
+// TODO: Adjust methods to new database CRUD methods with rethinkdb
 
 User.findById = (id, fn) => {
     db.findOne({ _id: id }, (err, doc) => {
