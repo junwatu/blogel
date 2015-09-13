@@ -1,5 +1,5 @@
-'use babel';
 /* @flow */
+'use babel';
 
 export type Post = {
     title: string,
@@ -9,7 +9,8 @@ export type Post = {
     lastUpdated: string,
     status: string,
     author: string,
-    tags: Array<string>
+    tags: Array<string>,
+    generated_keys?: any
 }
 
 export type Author = {
@@ -17,7 +18,8 @@ export type Author = {
     email: string,
     username: string,
     password: string,
-    token: string
+    token: string,
+    generated_keys?: any
 }
 
 export type PostCreated = {
