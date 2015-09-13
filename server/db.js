@@ -144,73 +144,74 @@ function getAllPost(): Array<Post> {
 function getPostById(id:string): Promise {
     return new	Promise((resolve, reject) => {
         getDbConnection().then((conn) => {
-	    r.db(DB_NAME).table(POST_TABLE_NAME).get(id).run(conn, function(err, result){
-	        err ? reject(err) : resolve(result);
+	        r.db(DB_NAME).table(POST_TABLE_NAME).get(id).run(conn, function(err, result){
+	            err ? reject(err) : resolve(result);
+	        })
 	    })
-	})
     });
 }
 
 function updatePost(post:Post): Promise {
-
     return new Promise((resolve, reject) => {
         getDbConnection().then((conn) => {
-	    r.db(DB_NAME).table(POST_TABLE_NAME).get(post.generated_keys[0]).update(post).run(conn, (err, status) => {
-	        err ? reject(err) : resolve(status);
-	    })
-	})
+	        if(post.generated_keys != null){
+                r.db(DB_NAME).table(POST_TABLE_NAME).get(post.generated_keys[0]).update(post).run(conn, (err, status) => {
+                    err ? reject(err) : resolve(status);
+                })    
+            }  
+	      })
     });
 }
 
 function deletePost(id:string): Promise {
     return new Promise((resolve, reject) => {
-        getDbConnection().then((conn) => {
-	    r.db(DB_NAME).table(POST_TABLE_NAME).get(id).delete().run(conn, (err, result) => {
+      getDbConnection().then((conn) => {
+	      r.db(DB_NAME).table(POST_TABLE_NAME).get(id).delete().run(conn, (err, result) => {
 	        err ? reject(err) : resolve(result);
-	    });
-	})
+	      });
+	  })
     })
 }
 
-
 function saveAuthor(author: Author): Promise {
     return new Promise((resolve, reject) => {
-        getDbConnection().then((conn) => {
-	    r.db(DB_NAME).table(AUTHORS_TABLE_NAME).insert(author).run(conn, (err, result) => {
-	      err ? reject(err) : resolve(result);
+      getDbConnection().then((conn) => {
+	      r.db(DB_NAME).table(AUTHORS_TABLE_NAME).insert(author).run(conn, (err, result) => {
+	        err ? reject(err) : resolve(result);
+	      })
 	    })
-	})
     })
 }
 
 function deleteAuthor(id: string): Promise {
     return new Promise((resolve, reject) => {
-        getDbConnection().then((conn) => {
-	    r.db(DB_NAME).table(AUTHORS_TABLE_NAME).get(id).delete().run(conn, (err, result) => {
-	       err ? reject(err) : resolve(result);
+      getDbConnection().then((conn) => {
+	      r.db(DB_NAME).table(AUTHORS_TABLE_NAME).get(id).delete().run(conn, (err, result) => {
+	        err ? reject(err) : resolve(result);
+	      })
 	    })
-	})
     });
 }
 
-
 function getAuthorById(id: string): Promise {
     return new Promise((resolve, reject) => {
-        getDbConnection().then((conn) => {
-	   r.db(DB_NAME).table(AUTHORS_TABLE_NAME).get(id).run(conn, (err, result) => {
-	       err ? reject(err) : resolve(result);
-	   })
-	})
+      getDbConnection().then((conn) => {
+	      r.db(DB_NAME).table(AUTHORS_TABLE_NAME).get(id).run(conn, (err, result) => {
+	        err ? reject(err) : resolve(result);
+	      })
+	    })
     })
 }
 
 function updateAuthor(author: Author): Promise {
     return new Promise((resolve, reject) => {
-        getDbConnection().then((conn) => {
-	    r.db(DB_NAME).table(AUTHORS_TABLE_NAME).get(author.generated_keys[0]).update(author).run(conn, (err, result) => {
-	        err ? reject(err) : resolve(result);
+      getDbConnection().then((conn) => {
+          if(author.generated_keys != null){
+              r.db(DB_NAME).table(AUTHORS_TABLE_NAME).get(author.generated_keys[0]).update(author).run(conn, (err, result) => {
+                  err ? reject(err) : resolve(result);
+              })
+          }
 	    })
-	})
     })
 }
 
