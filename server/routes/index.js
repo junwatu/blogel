@@ -1,4 +1,3 @@
-/* @flow */
 'use babel';
 
 'use strict';
@@ -25,7 +24,6 @@ exports.user = (req, res) => {
         "version": app.version,
         "page-status": "Draft",
         "page-date": moment().format("DD MMM YYYY"),
-        "title": 'Title',
         "content": "Content",
         "user-status": "Logout",
         "user": req.user
