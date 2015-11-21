@@ -1,16 +1,18 @@
 /* @flow */
-'use babel';
-'use strict';
 
-const DB_NAME = 'blogel';
-const POST_TABLE_NAME = 'posts';
-const AUTHORS_TABLE_NAME = 'authors';
+'use babel'
 
-const r = require('rethinkdb');
-const root = require('./util').path();
-const options = { host: 'localhost', port: 28015, authkey:'', db:DB_NAME};
+'use strict'
 
-import type { Post, Author, PostSum } from './core/types.js';
+import type { Post, Author, PostSum } from './core/types.js'
+
+const DB_NAME = 'blogel'
+const POST_TABLE_NAME = 'posts'
+const AUTHORS_TABLE_NAME = 'authors'
+
+const r = require('rethinkdb')
+const root = require('./util').path()
+const options = { host: 'localhost', port: 28015, authkey:'', db:DB_NAME}
 
 asyncInitDb();
 
@@ -123,8 +125,8 @@ function savePost(post:Post): Promise {
     })
 }
 
-function getAllPost(): Promise {
-  let allPost: Array<PostSum> = []
+function getAllPostSum(): Promise {
+  let allPostSum: Array<PostSum> = []
 
   return new Promise((resolve, reject) => {
     getDbConnection().then((conn) => {
@@ -139,7 +141,26 @@ function getAllPost(): Promise {
             post.status = row.status
             post.author = row.author
 
-            if(!err) allPost.push(post)
+            if(!err) allPostSum.push(post)
+          })
+          resolve(allPostSum)
+        } 
+      })
+    })    
+  })
+}
+
+function getAllPost(): Promise {
+  let allPost: Array<Post> = []
+
+  return new Promise((resolve, reject) => {
+    getDbConnection().then((conn) => {
+      r.db(DB_NAME).table(POST_TABLE_NAME).run(conn, (err, cursor) => {
+        if (err) { 
+          reject(err) 
+        } else {
+          cursor.each((err, row) => {
+            if(!err) allPost.push(row)
           })
           resolve(allPost)
         } 
