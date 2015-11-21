@@ -1,28 +1,16 @@
 /* @flow */
 'use babel';
-
 'use strict';
 
-var DB_NAME = 'blogel';
-var POST_TABLE_NAME = 'posts';
-var AUTHORS_TABLE_NAME = 'authors';
+const DB_NAME = 'blogel';
+const POST_TABLE_NAME = 'posts';
+const AUTHORS_TABLE_NAME = 'authors';
 
-var r = require('rethinkdb');
-var root = require('./util').path();
-var options = { host: 'localhost', port: 28015, authkey:'', db:DB_NAME};
+const r = require('rethinkdb');
+const root = require('./util').path();
+const options = { host: 'localhost', port: 28015, authkey:'', db:DB_NAME};
 
-import type { Post, Author } from './core/types.js';
-
-var samplePost:Post = {
-    title: 'Post',
-    content: 'Hello, World!',
-    postCreated : new Date(),
-    postPublished: '22-07-2015',
-    lastUpdated: '22-07-2015',
-    status: 'draft',
-    author: 'Maheso Anabrang',
-    tags: ['hello', 'dummy']
-}
+import type { Post, Author, PostSum } from './core/types.js';
 
 asyncInitDb();
 
@@ -135,10 +123,29 @@ function savePost(post:Post): Promise {
     })
 }
 
-function getAllPost(): Array<Post> {
-    var allPost:Array<Post> = [samplePost, samplePost];
+function getAllPost(): Promise {
+  let allPost: Array<PostSum> = []
 
-    return allPost;
+  return new Promise((resolve, reject) => {
+    getDbConnection().then((conn) => {
+      r.db(DB_NAME).table(POST_TABLE_NAME).run(conn, (err, cursor) => {
+        if (err) { 
+          reject(err) 
+        } else {
+          cursor.each((err, row) => {
+            let post = {}
+            post.id = row.id
+            post.title = row.title
+            post.status = row.status
+            post.author = row.author
+
+            if(!err) allPost.push(post)
+          })
+          resolve(allPost)
+        } 
+      })
+    })    
+  })
 }
 
 function getPostById(id:string): Promise {
@@ -216,10 +223,9 @@ function updateAuthor(author: Author): Promise {
 }
 
 function getPostByAuthor(authorId: string): Array<Post> {
-    var postsByAuthor: Array<Post> = [samplePost, samplePost];
+    var postsByAuthor: Array<Post> = []
     return postsByAuthor;
 }
-
 
 module.exports = {
     DB_NAME,
