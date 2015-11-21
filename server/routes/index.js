@@ -1,37 +1,34 @@
-'use babel';
+'use babel'
+'use strict'
 
-'use strict';
-var moment = require('moment');
-var app = require('../../package.json');
+const moment = require('moment')
+const app = require('../../package.json')
 
-import type { Post, PostCreated } from '../core/types.js';
-import { compile } from '../core/compile';
-import { savePost } from '../db.js';
+import type { Post, PostCreated } from '../core/types.js'
+import { compile } from '../core/compile'
+import { savePost, getAllPost } from '../db.js'
+import { Logger } from '../logger'
 
 exports.default = (req, res) => {
-    res.render('index', {
-        "title": app.name,
-        "version": app.version
-    });
+  res.render('index', {
+    "title": app.name,
+    "version": app.version
+  })
 }
 
 exports.user = (req, res) => {
-
-    //TODO : get the latest draft or published post
-
-    res.render('edit', {
-        "title": app.name,
-        "version": app.version,
-        "page-status": "Draft",
-        "page-date": moment().format("DD MMM YYYY"),
-        "content": "Content",
-        "user-status": "Logout",
-        "user": req.user
+  getAllPost().then((result) => {
+    res.render('list', {
+      "title": app.name,
+      "version": app.version,
+      "blogList": result,
+      "user": req.user
     });
+  }, (err) => console.log(err))
 }
 
 exports.savePost = (req, res) => {
-    let doc: Post = {
+    let doc:Post = {
         title: req.body.post.title.value,
         content: req.body.post.content.value,
         postCreated : new Date(),
@@ -44,7 +41,7 @@ exports.savePost = (req, res) => {
 
     savePost(doc).then((result) => {
         compile(doc).then((status) => {
-            var jsonOut = {
+            let jsonOut = {
                 post: status,
                 id: result.generated_keys
             }
@@ -108,3 +105,5 @@ exports.logout = (req, res) => {
     req.logout();
     res.redirect('/');
 }
+
+
