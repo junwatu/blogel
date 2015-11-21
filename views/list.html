@@ -15,16 +15,9 @@
             </div>
             <div class="five columns">
                 <ul id="nav">
-                    <!--
                     <li><a href="#" title="New Document" id="new-btn"><i class="fa fa-lg fa-plus"></i></a>
                     </li>
-                    -->
-                    <li><a href="#" title="Save Draft" id="save-btn"><i class="fa fa-lg fa-save"></i></a>
-                    </li>
                     <!--
-                    <li><a href="#" title="Publish" id="publish-btn"><i class="fa fa-lg fa-cloud-upload"></i></a>
-                    </li>
-
                     <li><a href="#" title="Settings" id="setting-btn"><i class="fa fa-lg fa-gear"></i></a>
                     </li>
                     <li><a href="#" title="Trash" id="trash-btn"><i class="fa fa-lg fa-trash-o"></i></a>
@@ -35,9 +28,9 @@
                 </ul>
             </div>
         </header>
-        <div class="sixteen columns page-status"><p>Blog List</p></div>
-        <div>
-            <ul>{{#each blogList}}<li><strong>{{title}}</strong> {{id}} [{{status}}]</li>{{/each}}</ul>
+        <div class="sixteen columns page-status">
+            <h1>Blog</h1>
+            <ul>{{#each blogList}}<li><h2>{{title}}</h2> <cite><a href="/api/posts/{{id}}">{{id}}</a> ({{status}})<cite></li>{{/each}}</ul>
         </div>
     </div>
     <script src="js/vendor/jquery-1.11.0.min.js"></script>
