@@ -2,7 +2,7 @@
 
 'use strict';
 
-var db = require('../../db');
+var db = require('../db');
 var bcrypt = require('bcrypt-nodejs');
 var sendto = require('../logger');
 var Logger = require('../logger').Logger;
