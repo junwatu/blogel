@@ -2,7 +2,7 @@
 
 'use strict'
 
-import { defaultRoute, user, api, saveNewPost, listPosts, getPost, updatePost, deletePost, loginPage, signupPage, logout } from './routes'
+import { defaultRoute, user, api, saveNewPost, listPosts, getPost, editPost, updatePost, deletePost, loginPage, signupPage, logout } from './routes'
 
 const express = require('express')
 const config = require('./config')
@@ -17,7 +17,7 @@ const session = require('express-session')
 const cookieParser = require('cookie-parser')
 
 const pring = express()
-const router = express.Router()
+const routerAPI = express.Router()
 
 require('./middleware/auth/passport')(passport)
 
@@ -26,7 +26,7 @@ function isLoggedin (req, res, next) {
   res.redirect('/')
 }
 
-pring.use(bodyParser.urlencoded({extended: true}))
+pring.use(bodyParser.urlencoded({ extended: true }))
 pring.use(bodyParser.json())
 pring.use(cookieParser())
 pring.use(methodOverride())
@@ -47,16 +47,18 @@ pring.set('view engine', 'html')
 
 config.get('passport:authentication') ? pring.get('/', defaultRoute) : pring.get('/', user)
 
-router.route('/').get(api)
-
-router.route('/posts')
+routerAPI.route('/').get(api)
+routerAPI.route('/posts')
   .post(saveNewPost)
   .get(listPosts)
-
-router.route('/posts/:id')
-  .get(getPost)
+routerAPI.route('/posts/:id')
+  .get(editPost)
   .put(updatePost)
   .delete(deletePost)
+
+pring.use('/api', routerAPI)
+
+pring.get('/posts/:id', getPost)
 
 pring.post('/login', passport.authenticate('local-login', {
   successRedirect: '/user',
@@ -74,8 +76,6 @@ pring.get('/signup', signupPage)
 
 pring.get('/logout', logout)
 pring.get('/user', isLoggedin, user)
-
-pring.use('/api', router)
 
 pring.listen(config.get('express:port'), () => console.log(`Blogel is running on port ${config.get('express:port')}`))
 

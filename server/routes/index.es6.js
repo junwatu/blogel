@@ -1,6 +1,6 @@
 export default class Routes {
-    constructor(){ 
-    }
+    
+    constructor(){ }
 
     default(req: any, res: any) {
         res.render('index', {
@@ -10,7 +10,6 @@ export default class Routes {
     }
 
     user(req: any, res: any) {
-        //TODO : get the latest draft or published post
         res.render('edit', {
             "title": app.name,
             "version": app.version,

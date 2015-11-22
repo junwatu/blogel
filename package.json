@@ -28,7 +28,7 @@
     "watch-css": "onchange scss/blogel.scss -- npm run build-css",
     "watch-flow": "onchange 'server/*.js' 'server/**/*.js' -- npm run flow",
     "watch-js": "echo TODO",
-    "test": "npm run transpile-all && mocha test/*.spec.js"
+    "test": "npm run transpile && mocha test/*.spec.js"
   },
   "keywords": [
     "generator",
@@ -38,7 +38,7 @@
     "static page editor",
     "static page generator"
   ],
-  "author": "Equan Pr. <byte@equan.me> (http://equan.me)",
+  "author": "Equan Pr. <equan.p@gmail.com> (http://junwatu.github.io)",
   "dependencies": {
     "babel-core": "^5.7.4",
     "babel-runtime": "^5.7.0",
@@ -61,6 +61,8 @@
     "passport": "~0.2.0",
     "passport-local": "~0.1.6",
     "rethinkdb": "^2.0.2",
+    "striptags": "^2.0.4",
+    "t3js": "^2.0.2",
     "temp": "^0.8.3",
     "uglify-js": "^2.4.23",
     "winston": "~0.7.2"
@@ -70,6 +72,7 @@
     "mocha": "^2.2.5",
     "node-sass": "^3.2.0",
     "onchange": "^1.1.0",
+    "supertest": "^1.1.0",
     "uglifyjs": "^2.4.10"
   },
   "license": "MIT"

@@ -179,12 +179,12 @@ function getPostById(id:string): Promise {
     });
 }
 
-function updatePost(post:Post): Promise {
+function updateThePost(post:Post): Promise {
     return new Promise((resolve, reject) => {
         getDbConnection().then((conn) => {
 	        if(post.generated_keys != null){
-                r.db(DB_NAME).table(POST_TABLE_NAME).get(post.generated_keys[0]).update(post).run(conn, (err, status) => {
-                    err ? reject(err) : resolve(status);
+                r.db(DB_NAME).table(POST_TABLE_NAME).get(post.generated_keys).update(post).run(conn, (err, status) => {
+                    err ? reject(err) : resolve(post);
                 })    
             }  
 	      })
@@ -257,7 +257,7 @@ module.exports = {
     getPostById,
     getPostByAuthor,
     savePost,
-    updatePost,
+    updateThePost,
     deletePost,
     saveAuthor,
     deleteAuthor,

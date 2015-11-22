@@ -6,14 +6,15 @@
 
 const moment = require('moment')
 const app = require('../../package.json')
+const striptags = require('striptags')
 
 import type { Post, PostCreated } from '../core/types.js'
 
-import { savePost, getAllPost, getPostById } from '../db.js'
 import { compile } from '../core/compile'
 import { Logger } from '../logger'
+import { savePost, getAllPost, getPostById, updateThePost } from '../db.js'
 
-function defaultRoute (req:any, res:any) {
+function defaultRoute (req: any, res: any) {
   res.render('index', { "title": app.name, "version": app.version })
 }
 
@@ -21,8 +22,12 @@ function api (req: any, res: any) {
   res.json({ api: app.version, description: app.description })
 }
 
-function user (req:any, res:any) {
+function user (req: any, res: any) {
   getAllPost().then((result) => {
+    result.forEach((el, index, array) => {
+      result[index].title = striptags(result[index].title)
+    })
+
     res.render('list', {
       "title": app.name,
       "version": app.version,
@@ -32,9 +37,9 @@ function user (req:any, res:any) {
   }, (err) => console.log(err))
 }
 
-function saveNewPost (req:any, res:any) {
+function saveNewPost (req: any, res: any) {
   let now = new Date()
-  let doc:Post = {
+  let doc: Post = {
     title: req.body.post.title.value,
     content: req.body.post.content.value,
     postCreated : now.toString(),
@@ -50,47 +55,66 @@ function saveNewPost (req:any, res:any) {
       let jsonOut = { post: status, id: result.generated_keys }
       res.json(jsonOut)
     }, (err) => res.json({ error: err }))
-    }, (err) => res.json({ error: err }))
+  }, (err) => res.json({ error: err }))
 }
 
-function listPosts (req:any, res:any) {
+function listPosts (req: any, res: any) {
   getAllPost().then((result) => {
     res.json(result)  
   }, (err) => console.log(err))
 }
 
-function listDraftPosts (req:any, res:any) {
-    res.json({
-        process: 'list draft posts'
-    });
+function listDraftPosts (req: any, res: any) {
+  res.json({
+    process: 'list draft posts'
+  });
 }
 
-function listPublishedPosts (req:any, res:any) {
-    res.json({
-        process: 'list published posts'
-    });
+function listPublishedPosts (req: any, res: any) {
+  res.json({
+    process: 'list published posts'
+  });
 }
 
-function getPost (req:any, res:any) {
+function editPost (req: any, res: any) {
   let postId = req.params.id
   getPostById(postId).then((result) => {
+    res.render('edit', { post: result })
+  })
+}
+
+function getPost (req: any, res: any) {
+  let postId = req.params.id
+  getPostById(postId).then((result) => {
+    res.json({ post: result })
+  })
+}
+function updatePost (req: any, res: any) {
+  let now = new Date()
+  let doc: Post = {
+    title: req.body.post.title.value,
+    content: req.body.post.content.value,
+    postCreated : now.toString(),
+    postPublished: '',
+    lastUpdated: now.toString(),
+    status: req.body.post.status,
+    author: '',
+    tags: ['hello', 'world'],
+    generated_keys: req.params.id
+  }
+  
+  updateThePost(doc).then((result) => {
     res.json(result)
   })
 }
 
-function updatePost (req:any, res:any) {
-    res.json({
-        process: 'update post'
-    });
-}
-
-function deletePost (req:any, res:any) {
+function deletePost (req: any, res: any) {
     res.json({
         process: 'delete post'
     });
 }
 
-function loginPage (req:any, res:any) {
+function loginPage (req: any, res: any) {
   res.render('login', {
     title: app.name,
     version: app.version,
@@ -98,7 +122,7 @@ function loginPage (req:any, res:any) {
   });
 }
 
-function signupPage (req:any, res:any) {
+function signupPage (req: any, res: any) {
   res.render('signup', {
     title: app.name,
     version: app.version,
@@ -106,7 +130,7 @@ function signupPage (req:any, res:any) {
   })
 }
 
-function logout (req:any, res:any) {
+function logout (req: any, res: any) {
   req.logout()
   res.redirect('/')
 }
@@ -119,7 +143,8 @@ module.exports = {
   listPosts,
   listDraftPosts,
   listPublishedPosts,
-  getPost,
+  getPost, 
+  editPost,
   updatePost,
   deletePost,
   loginPage,

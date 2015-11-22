@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{{title}} - {{version}}</title>
-    <link rel="stylesheet" href="css/bundle.min.css">
+    <link rel="stylesheet" href="/css/bundle.min.css">
 </head>
 
 <body>
@@ -15,7 +15,7 @@
             </div>
             <div class="five columns">
                 <ul id="nav">
-                    <li><a href="#" title="New Document" id="new-btn"><i class="fa fa-lg fa-plus"></i></a>
+                    <li><a href="#" title="New Post" id="new-btn"><i class="fa fa-lg fa-plus"></i></a>
                     </li>
                     <!--
                     <li><a href="#" title="Settings" id="setting-btn"><i class="fa fa-lg fa-gear"></i></a>
@@ -30,10 +30,14 @@
         </header>
         <div class="sixteen columns page-status">
             <h1>Blog</h1>
-            <ul>{{#each blogList}}<li><h2>{{title}}</h2> <cite><a href="/api/posts/{{id}}">{{id}}</a> ({{status}})<cite></li>{{/each}}</ul>
+            <ul>
+            {{#each blogList}}
+              <li><h2>{{title}}</h2> <cite><a href="/api/posts/{{id}}">{{id}}</a> ({{status}})<cite></li>
+            {{/each}}
+            </ul>
         </div>
     </div>
-    <script src="js/vendor/jquery-1.11.0.min.js"></script>
-    <script src="js/bundle.min.js"></script>
+    <script src="/js/vendor/jquery-1.11.0.min.js"></script>
+    <script src="/js/bundle.min.js"></script>
 </body>
 </html>
