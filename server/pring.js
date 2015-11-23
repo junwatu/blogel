@@ -77,7 +77,7 @@ pring.get('/signup', signupPage)
 pring.get('/logout', logout)
 pring.get('/user', isLoggedin, user)
 
-pring.listen(config.get('express:port'), () => console.log(`Blogel is running on port ${config.get('express:port')}`))
+pring.listen(config.get('express:port'), () => Logger.info(`Blogel is running on port ${config.get('express:port')}`))
 
 process.on('unhandledRejection', (err) => Logger.error(err.stack))
 
