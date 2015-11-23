@@ -24,6 +24,7 @@ function api (req: any, res: any) {
 
 function user (req: any, res: any) {
   getAllPost().then((result) => {
+    
     result.forEach((el, index, array) => {
       result[index].title = striptags(result[index].title)
     })
