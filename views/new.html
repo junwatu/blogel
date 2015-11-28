@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{post.status}} - {{post.title}}</title>
+  <link rel="stylesheet" href="/css/bundle.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="eleven columns">
+                <h5 class="title" title="Write and publish static pages!">BLOGEL</h5>
+            </div>
+            <div class="five columns">
+                <ul id="nav">
+                    <!--
+                    <li><a href="#" title="New Document" id="new-btn"><i class="fa fa-lg fa-plus"></i></a>
+                    </li>
+                    -->
+                    <li><a href="#" title="Save Draft" id="update-btn"><i class="fa fa-lg fa-save"></i></a>
+                    </li>
+                    <!--
+                    <li><a href="#" title="Publish" id="publish-btn"><i class="fa fa-lg fa-cloud-upload"></i></a>
+                    </li>
+
+                    <li><a href="#" title="Settings" id="setting-btn"><i class="fa fa-lg fa-gear"></i></a>
+                    </li>
+                    <li><a href="#" title="Trash" id="trash-btn"><i class="fa fa-lg fa-trash-o"></i></a>
+                    </li>
+                    -->
+                    <li>
+                      <a href="/logout" title="{{user-status}}" id="user-btn">
+                        <i class="fa fa-lg fa-sign-in"></i>
+                      </a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <div class="sixteen columns page-status">
+            <span id="status">{{post.status}}</span> <i class="fa fa-calendar-o"></i> {{post.postCreated}}
+        </div>
+        <h1 class="editable" data-placeholder="Telaga Sewu">Blogel</h1>
+        <div class="editable sixteen columns" data-placeholder="The legendary lake"></div>
+    </div>
+    <script src="/js/vendor/jquery-1.11.0.min.js"></script>
+    <script src="/js/bundle.min.js"></script>
+</body>
+</html>
