@@ -11,23 +11,10 @@
             <div class="eleven columns">
                 <h5 class="title" title="Write and publish static pages!">BLOGEL</h5>
             </div>
-            <div class="five columns">
+            <div class="five columns" data-module="navigation">
                 <ul id="nav">
-                    <!--
-                    <li><a href="#" title="New Document" id="new-btn"><i class="fa fa-lg fa-plus"></i></a>
+                     <li><a href="#" title="Save Draft" id="update-btn" data-type="update-btn"><i class="fa fa-lg fa-save"></i></a>
                     </li>
-                    -->
-                    <li><a href="#" title="Save Draft" id="update-btn"><i class="fa fa-lg fa-save"></i></a>
-                    </li>
-                    <!--
-                    <li><a href="#" title="Publish" id="publish-btn"><i class="fa fa-lg fa-cloud-upload"></i></a>
-                    </li>
-
-                    <li><a href="#" title="Settings" id="setting-btn"><i class="fa fa-lg fa-gear"></i></a>
-                    </li>
-                    <li><a href="#" title="Trash" id="trash-btn"><i class="fa fa-lg fa-trash-o"></i></a>
-                    </li>
-                    -->
                     <li>
                       <a href="/logout" title="{{user-status}}" id="user-btn">
                         <i class="fa fa-lg fa-sign-in"></i>
@@ -43,6 +30,16 @@
         <div class="editable sixteen columns">{{post.content}}</div>
     </div>
     <script src="/js/vendor/jquery-1.11.0.min.js"></script>
+    <script src="/js/vendor/t3-2.0.2.js"></script>
+    <!-- modules -->
+    <script src="/js/blogel/modules/navigation.js"></script>
+    <!-- services -->
+    <script src="/js/blogel/services/post.js"></script>
+    <script>
+      Box.Application.init({
+        debug: true
+      })
+    </script>
     <script src="/js/bundle.min.js"></script>
 </body>
 </html>
