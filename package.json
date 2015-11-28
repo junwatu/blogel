@@ -19,15 +19,11 @@
     "build-css": "npm run sass && scripts/cat-css.sh | cleancss -o public/css/bundle.min.css",
     "build-js": "browserify public/js/blogelweb.js | uglifyjs -mc > public/js/bundle.min.js",
     "copy": "scripts/copy-assets.sh",
-    "dev": "npm run transpile && npm start",
     "flow": "echo 'flow check...' && flow",
     "sass": "sass scss/blogel.scss public/css/blogel.css",
-    "start": "node blogel.js --harmony --use-babel | ./node_modules/.bin/bunyan",
-    "transpile": "scripts/recurse.sh",
-    "watch": "echo TODO",
+    "start": "/usr/bin/babel-node blogel.js | ./node_modules/.bin/bunyan",
     "watch-css": "onchange scss/blogel.scss -- npm run build-css",
     "watch-flow": "onchange 'server/*.js' 'server/**/*.js' -- npm run flow",
-    "watch-js": "echo TODO",
     "test": "npm run transpile && mocha test/*.spec.js"
   },
   "keywords": [
