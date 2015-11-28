@@ -2,7 +2,7 @@
 
 'use strict'
 
-import { defaultRoute, user, api, saveNewPost, listPosts, getPost, editPost, updatePost, deletePost, loginPage, signupPage, logout } from './routes'
+import { defaultRoute, user, api, savePostAPI, listPostsAPI, getPostAPI, getPostView, updatePostAPI, deletePostAPI, loginPage, signupPage, logout } from './routes'
 
 const express = require('express')
 const config = require('./config')
@@ -15,6 +15,7 @@ const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
+const favicon = require('serve-favicon')
 
 const pring = express()
 const routerAPI = express.Router()
@@ -30,6 +31,7 @@ pring.use(bodyParser.urlencoded({ extended: true }))
 pring.use(bodyParser.json())
 pring.use(cookieParser())
 pring.use(methodOverride())
+pring.use(favicon(__dirname + '/public/favicon.ico'))
 
 pring.use(session({
   secret: 'pagedekisasimplestaticgenerator',
@@ -49,16 +51,16 @@ config.get('passport:authentication') ? pring.get('/', defaultRoute) : pring.get
 
 routerAPI.route('/').get(api)
 routerAPI.route('/posts')
-  .post(saveNewPost)
-  .get(listPosts)
+  .post(savePostAPI)
+  .get(listPostsAPI)
 routerAPI.route('/posts/:id')
-  .get(editPost)
-  .put(updatePost)
-  .delete(deletePost)
+  .get(getPostAPI)
+  .put(updatePostAPI)
+  .delete(deletePostAPI)
 
 pring.use('/api', routerAPI)
 
-pring.get('/posts/:id', getPost)
+pring.get('/posts/:id', getPostView)
 
 pring.post('/login', passport.authenticate('local-login', {
   successRedirect: '/user',

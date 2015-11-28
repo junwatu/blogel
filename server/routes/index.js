@@ -38,7 +38,14 @@ function user (req: any, res: any) {
   }, (err) => console.log(err))
 }
 
-function saveNewPost (req: any, res: any) {
+function getPostView (req: any, res: any) {
+  let postId = req.params.id
+  getPostById(postId).then((result) => {
+    res.render('edit', { post: result })
+  })
+}
+
+function savePostAPI (req: any, res: any) {
   let now = new Date()
   let doc: Post = {
     title: req.body.post.title.value,
@@ -59,38 +66,31 @@ function saveNewPost (req: any, res: any) {
   }, (err) => res.json({ error: err }))
 }
 
-function listPosts (req: any, res: any) {
+function listPostsAPI (req: any, res: any) {
   getAllPost().then((result) => {
     res.json(result)  
   }, (err) => console.log(err))
 }
 
-function listDraftPosts (req: any, res: any) {
+function listDraftPostsAPI (req: any, res: any) {
   res.json({
     process: 'list draft posts'
   });
 }
 
-function listPublishedPosts (req: any, res: any) {
+function listPublishedPostsAPI (req: any, res: any) {
   res.json({
     process: 'list published posts'
   });
 }
 
-function editPost (req: any, res: any) {
-  let postId = req.params.id
-  getPostById(postId).then((result) => {
-    res.render('edit', { post: result })
-  })
-}
-
-function getPost (req: any, res: any) {
+function getPostAPI (req: any, res: any) {
   let postId = req.params.id
   getPostById(postId).then((result) => {
     res.json({ post: result })
   })
 }
-function updatePost (req: any, res: any) {
+function updatePostAPI (req: any, res: any) {
   let now = new Date()
   let doc: Post = {
     title: req.body.post.title.value,
@@ -109,7 +109,7 @@ function updatePost (req: any, res: any) {
   })
 }
 
-function deletePost (req: any, res: any) {
+function deletePostAPI (req: any, res: any) {
     res.json({
         process: 'delete post'
     });
@@ -139,15 +139,15 @@ function logout (req: any, res: any) {
 module.exports = {
   defaultRoute,
   user,
-  saveNewPost,
+  savePostAPI,
   api,
-  listPosts,
-  listDraftPosts,
-  listPublishedPosts,
-  getPost, 
-  editPost,
-  updatePost,
-  deletePost,
+  listPostsAPI,
+  listDraftPostsAPI,
+  listPublishedPostsAPI,
+  getPostAPI,
+  getPostView,
+  updatePostAPI,
+  deletePostAPI,
   loginPage,
   signupPage,
   logout
