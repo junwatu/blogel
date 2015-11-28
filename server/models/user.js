@@ -1,5 +1,3 @@
-'use babel';
-
 'use strict';
 
 var db = require('../db');

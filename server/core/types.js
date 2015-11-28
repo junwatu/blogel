@@ -1,5 +1,4 @@
 /* @flow */
-'use babel'
 
 export type Post = {
   title: string,

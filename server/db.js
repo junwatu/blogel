@@ -1,7 +1,4 @@
 /* @flow */
-
-'use babel'
-
 'use strict'
 
 import type { Post, Author, PostSum } from './core/types.js'

@@ -1,7 +1,4 @@
 /* @flow */
-
-'use babel'
-
 'use strict'
 
 const moment = require('moment')

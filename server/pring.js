@@ -1,5 +1,3 @@
-'use babel'
-
 'use strict'
 
 import { defaultRoute, user, api, savePostAPI, listPostsAPI, getPostAPI, getPostView, updatePostAPI, deletePostAPI, loginPage, signupPage, logout } from './routes'
