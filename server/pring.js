@@ -15,7 +15,7 @@ const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
-const favicon = require('serve-favicon')
+const favicon = require('express-favicon')
 
 const pring = express()
 const routerAPI = express.Router()
@@ -31,7 +31,7 @@ pring.use(bodyParser.urlencoded({ extended: true }))
 pring.use(bodyParser.json())
 pring.use(cookieParser())
 pring.use(methodOverride())
-pring.use(favicon(__dirname + '/public/favicon.ico'))
+pring.use(favicon(`${root.path()}/public/favicon.ico`))
 
 pring.use(session({
   secret: 'pagedekisasimplestaticgenerator',
