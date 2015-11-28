@@ -40,8 +40,6 @@
   ],
   "author": "Equan Pr. <equan.p@gmail.com> (http://junwatu.github.io)",
   "dependencies": {
-    "babel-core": "^5.7.4",
-    "babel-runtime": "^5.7.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.0.2",
     "bunyan": "^1.5.1",
@@ -68,12 +66,19 @@
     "uglify-js": "^2.4.23"
   },
   "devDependencies": {
+    "babel": "^6.1.18",
+    "babel-core": "^6.2.1",
+    "babel-loader": "^6.2.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.2.0",
+    "babel-plugin-transform-flow-strip-types": "^6.1.18",
     "clean-css": "^3.3.6",
+    "gulp": "^3.9.0",
     "mocha": "^2.2.5",
     "node-sass": "^3.2.0",
     "onchange": "^1.1.0",
     "supertest": "^1.1.0",
-    "uglifyjs": "^2.4.10"
+    "uglifyjs": "^2.4.10",
+    "webpack": "^1.12.9"
   },
   "license": "MIT"
 }
