@@ -1,6 +1,8 @@
 Blogel
 =======
 
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+
 Another static page generator but simpler and spesific. I built it for fun and to generate my static blog pages :smile:.
 
 The workflow is simple just like when you are blogging, writing page via web editor and then save it as draft or just publish it on cloud or github. When you publishing page Blogel will generate it as static page and then upload it on cloud or github.
