@@ -21,30 +21,19 @@ var editor = new MediumEditor(document.querySelectorAll('.editable'), {
   }
 })
 
+var service = Box.Application.getService('post')
+
 var idStatus = document.getElementById('status')
+
 if (idStatus) {
   var postId = idStatus.getAttribute('title')
-  update(postId)
-}
 
-function update (id) {
-  $.ajax({
-    url: '/posts/' + id,
-    type: 'get',
-    dataType: 'json',
-    success: function (data) {
-      console.log(data)
-      editor.setContent(data.post.title, 0)
-      editor.setContent(data.post.content, 1)
-    },
-    error: function (err) {
-      console.log(err)
-    }
+  service.getPostById(postId).then(function (data) {
+    editor.setContent(data.post.title, 0)
+    editor.setContent(data.post.content, 1)
+  }, function (error) {
+    console.log(error)
   })
-}
-
-function onNewDocument(event) {
-  console.log('New Document clicked!')
 }
 
 function onPublish (event) {
@@ -61,47 +50,32 @@ function onSave (event) {
     }
   }
 
-  $.ajax({
-    url: '/api/posts',
-    type: 'post',
-    data: post_content,
-    dataType: 'json',
-    success: function (data) {
-      console.log('Save Post')
-      console.log(data)
-    },
-    error: function (err) {
-      console.log(err)
-    }
+  service.savePost(post_content).then(function (data) {
+    console.log(data)
+  }, function (error) {
+    console.log(error)
   })
 }
 
 function onUpdate (event) {
   var content = editor.serialize()
+  var idStatus = document.getElementById('status')
+  var postId = idStatus.getAttribute('title')
   var post_content_update = {
     post: {
       title: content['element-0'],
       content: content['element-1'],
-      status: 'draft'
+      status: 'draft',
+      id: postId
     }
   }
 
-  var idStatus = document.getElementById('status')
-  var postId = idStatus.getAttribute('title')
-
-  $.ajax({
-    url: '/api/posts/' + postId,
-    type: 'put',
-    data: post_content_update,
-    dataType: 'json',
-    success: function (data) {
-      console.log(data)
-      editor.setContent(data.title, 0)
-      editor.setContent(data.content, 1)
-    },
-    error: function (err) {
-      console.log(err)
-    }
+  service.updatePost(post_content_update).then(function (data) {
+    console.log(data)
+    editor.setContent(data.title, 0)
+    editor.setContent(data.content, 1)
+  }, function (error) {
+    console.log(error)
   })
 }
 
@@ -113,7 +87,6 @@ function onDeleteDoc (event) {
   console.log('trash-btn clicked!')
 }
 
-$('#new-btn').on('click', onNewDocument)
 $('#publish-btn').on('click', onPublish)
 $('#save-btn').on('click', onSave)
 $('#update-btn').on('click', onUpdate)
