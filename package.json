@@ -24,7 +24,7 @@
     "start": "/usr/bin/babel-node blogel.js | ./node_modules/.bin/bunyan",
     "watch-css": "onchange scss/blogel.scss -- npm run build-css",
     "watch-flow": "onchange 'server/*.js' 'server/**/*.js' -- npm run flow",
-    "test": "npm run transpile && mocha test/*.spec.js"
+    "test": "mocha --compilers js:babel-core/register test/*.spec.js"
   },
   "keywords": [
     "generator",
