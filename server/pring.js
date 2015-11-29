@@ -1,22 +1,25 @@
 'use strict'
 
-import { defaultRoute, user, api, savePostAPI, listPostsAPI, getPostAPI, getPostView, updatePostAPI, deletePostAPI, loginPage, signupPage, logout } from './routes'
+import express from 'express'
+import engine from 'consolidate'
+import passport from 'passport'
+import flash from 'connect-flash'
+import bodyParser from 'body-parser'
+import methodOverride from 'method-override'
+import session from 'express-session'
+import cookieParser from 'cookie-parser'
+import favicon from 'express-favicon'
 
-const express = require('express')
-const config = require('./config')
-const engine = require('consolidate')
+import * as r from './routes'
+import Api from './routes/api'
+import config from './config'
+
 const root = require('./util')
-const passport = require('passport')
-const flash = require('connect-flash')
 const Logger = require('./logger').Logger
-const bodyParser = require('body-parser')
-const methodOverride = require('method-override')
-const session = require('express-session')
-const cookieParser = require('cookie-parser')
-const favicon = require('express-favicon')
-
 const pring = express()
 const routerAPI = express.Router()
+
+let blogelApp = new Api()
 
 require('./middleware/auth/passport')(passport)
 
@@ -45,37 +48,38 @@ pring.set('views', `${root.path()}/views`)
 pring.engine('html', engine.handlebars)
 pring.set('view engine', 'html')
 
-config.get('passport:authentication') ? pring.get('/', defaultRoute) : pring.get('/', user)
+config.get('passport:authentication') ? pring.get('/', r.defaultRoute) : pring.get('/', r.user)
 
-routerAPI.route('/').get(api)
+routerAPI.route('/').get(blogelApp.info)
+
 routerAPI.route('/posts')
-  .post(savePostAPI)
-  .get(listPostsAPI)
+  .post(blogelApp.savePostAPI)
+  .get(r.listPostsAPI)
 routerAPI.route('/posts/:id')
-  .get(getPostAPI)
-  .put(updatePostAPI)
-  .delete(deletePostAPI)
+  .get(r.getPostAPI)
+  .put(blogelApp.updatePostAPI)
+  .delete(r.deletePostAPI)
 
 pring.use('/api', routerAPI)
 
-pring.get('/posts/:id', getPostView)
+pring.get('/posts/:id', r.getPostView)
 
 pring.post('/login', passport.authenticate('local-login', {
   successRedirect: '/user',
   failureRedirect: '/login',
   failureFlash: true
 }))
-pring.get('/login', loginPage)
+pring.get('/login', r.loginPage)
 
 pring.post('/signup', passport.authenticate('local-signup', {
   successRedirect: '/user',
   failureRedirect: '/signup',
   failureFlash: true
 }))
-pring.get('/signup', signupPage)
+pring.get('/signup', r.signupPage)
 
-pring.get('/logout', logout)
-pring.get('/user', isLoggedin, user)
+pring.get('/logout', r.logout)
+pring.get('/user', isLoggedin, r.user)
 
 pring.listen(config.get('express:port'), () => Logger.info(`Blogel is running on port ${config.get('express:port')}`))
 
