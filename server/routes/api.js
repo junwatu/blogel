@@ -55,5 +55,34 @@ export default class Api {
     updateThePost(doc).then((result) => res.json(result))
   }
 
-  
+  listPostsAPI (req: any, res: any) {
+    getAllPost().then((result) => {
+      res.json(result)  
+    }, (err) => console.log(err))
+  }
+
+  listDraftPostsAPI (req: any, res: any) {
+    res.json({
+      process: 'list draft posts'
+    })
+  }
+
+  listPublishedPostsAPI (req: any, res: any) {
+    res.json({
+      process: 'list published posts'
+    })
+  }
+
+  getPostAPI (req: any, res: any) {
+    let postId = req.params.id
+      getPostById(postId).then((result) => {
+        res.json({ post: result })
+    })
+  }
+
+  deletePostAPI (req: any, res: any) {
+    res.json({
+      process: 'delete post'
+    })
+  }
 }
