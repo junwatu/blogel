@@ -1,4 +1,4 @@
-var db = require('../tmp/db.js');
+var db = require('../server/db.js');
 var assert = require('assert');
 
 var post = {
@@ -49,7 +49,7 @@ describe('Blogel Database Test', function(){
 
     it('Should update post', function(){
        post_update.generated_keys = [post_id];
-       db.updatePost(post_update).then(function(data){
+       db.updateThePost(post_update).then(function(data){
            assert.equal(1, data.replaced, 'replaced (updated) should be 1');
 	   done();
        }, function(err){

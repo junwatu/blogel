@@ -1,4 +1,4 @@
-var db = require('../tmp/db.js');
+var db = require('../server/db.js');
 var assert = require('assert');
 
 var author = {
