@@ -1,17 +1,14 @@
-Blogel
-=======
+#Blogel
 
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+[![Circle CI](https://circleci.com/gh/junwatu/blogel.svg?style=shield)](https://circleci.com/gh/junwatu/blogel) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
-Another static page generator but simpler and spesific. I built it for fun and to generate my static blog pages :smile:.
-
-The workflow is simple just like when you are blogging, writing page via web editor and then save it as draft or just publish it on cloud or github.
+Another static page generator but simpler and spesific. I built it for fun and to generate my static blog pages :smile:. The workflow is simple just like when you are blogging, writing page via web editor and then save it as draft or just publish it on cloud or github.
 
 
 >  NOTE: it's alpha! so i don't guarantee this app will works like it should
 
 
-###Features
+##Features
 - Generate static page.
 - Web editor.
 - Upload pages to Github.
