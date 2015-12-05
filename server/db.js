@@ -11,25 +11,30 @@ const AUTHORS_TABLE_NAME = 'authors'
 const root = require('./util').path()
 const options = { host: 'localhost', port: 28015, authkey:'', db:DB_NAME}
 
-asyncInitDb()
+//init()
 
-function asyncInitDb(log:boolean = true) {
+function init(log:boolean = true) {
     getDbConnection().then((conn) => {
       dbIsExist(conn).then((status) => {
         if(!status.exist) {        
-          createDatabase(conn)
+          createDatabase(conn).then((result) => {
+            console.log(`Create database ${DB_NAME}`)
+            isTableExist(POST_TABLE_NAME, conn).then((status) => {
+              if(!status.exist) {
+                createTable(POST_TABLE_NAME, status.conn).then((result) => {
+                  console.log(`Create table ${POST_TABLE_NAME}`)
+                  isTableExist(AUTHORS_TABLE_NAME, conn).then((status) => {
+                    if(!status.exist) {
+                      createTable(AUTHORS_TABLE_NAME, status.conn).then(() => {
+                        console.log(`Create table ${AUTHORS_TABLE_NAME}`)
+                      })
+                    }
+                  })
+                })
+              }
+            })
+          })
         }
-        isTableExist(POST_TABLE_NAME, response.conn).then((status) => {
-          if(!status.exist) {
-            createTable(POST_TABLE_NAME, status.conn);
-          }
-        })
-
-        isTableExist(AUTHORS_TABLE_NAME, response.conn).then((status) => {
-          if(!status.exist) {
-            createTable(AUTHORS_TABLE_NAME, status.conn);
-          }
-        })
       }, (err) => console.log(err))
     }, (err) => console.log(err))
 }
@@ -252,6 +257,7 @@ module.exports = {
     DB_NAME,
     POST_TABLE_NAME,
     AUTHORS_TABLE_NAME,
+    init,
     getDbConnection,
     getAllPost,
     getPostById,
