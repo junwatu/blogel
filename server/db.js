@@ -13,49 +13,25 @@ const options = { host: 'localhost', port: 28015, authkey:'', db:DB_NAME}
 
 asyncInitDb()
 
-/**
-export default class Db () {
-  constructor () {
-    
-  }
-}
-*/
-
 function asyncInitDb(log:boolean = true) {
-    getDbConnection()
-    .then((conn) => {
-        dbIsExist(conn).then((status) => {
-            if(!status.exist) {
-                return createDatabase(conn);
-            }
-            return p(status.conn);
+    getDbConnection().then((conn) => {
+      dbIsExist(conn).then((status) => {
+        if(!status.exist) {        
+          createDatabase(conn)
+        }
+        isTableExist(POST_TABLE_NAME, response.conn).then((status) => {
+          if(!status.exist) {
+            createTable(POST_TABLE_NAME, status.conn);
+          }
         })
-        .then( (response) => {
-            isTableExist(POST_TABLE_NAME, response.conn).then((status) => {
-                if(!status.exist) {
-                    return createTable(POST_TABLE_NAME, status.conn);
-                }
-                return p(status.conn)
-            })
-            .then( (response) => {
-                isTableExist(AUTHORS_TABLE_NAME, response.conn).then((status) => {
-                    if(!status.exist) {
-                        return createTable(AUTHORS_TABLE_NAME, status.conn);
-                    }
-                    return p(status.conn);
-                })
-                .then( (res) => {
-                    res.conn.close((err) => {
-                        if(err) console.log(err) ;
-                    });
-                })
-                .catch( (err) => {
-                    console.log(err.message);
-                    process.exit(1);
-                });
-            })
+
+        isTableExist(AUTHORS_TABLE_NAME, response.conn).then((status) => {
+          if(!status.exist) {
+            createTable(AUTHORS_TABLE_NAME, status.conn);
+          }
         })
-    })
+      }, (err) => console.log(err))
+    }, (err) => console.log(err))
 }
 
 function p(conn: any): Promise {
