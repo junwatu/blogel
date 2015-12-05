@@ -12,7 +12,7 @@ const striptags = require('striptags')
 
 export default class Api {
   constructor () {}
-  
+
   info (req: any, res: any) {
     res.json({ api: app.version, description: app.description })
   }
@@ -51,23 +51,20 @@ export default class Api {
       tags: ['hello', 'world'],
       generated_keys: req.params.id
     }
-  
+
     updateThePost(doc).then((result) => res.json(result))
   }
 
-  listPostsAPI (req: any, res: any) {
-    getAllPost().then((result) => {
-      res.json(result)  
-    }, (err) => console.log(err))
+  listPostAPI (req: any, res: any) {
+    getAllPost().then((result) => res.json(result), (err) => console.log(err))
   }
 
-  listDraftPostsAPI (req: any, res: any) {
-    res.json({
-      process: 'list draft posts'
-    })
+  listPostDraftAPI (req: any, res: any) {
+    getAllPostDraft().then((result) => res.json(result), (err) => console.log(err))
   }
 
-  listPublishedPostsAPI (req: any, res: any) {
+  listPublishedPostAPI (req: any, res: any) {
+
     res.json({
       process: 'list published posts'
     })
