@@ -24,7 +24,7 @@
     "start": "/usr/bin/babel-node blogel.js | ./node_modules/.bin/bunyan",
     "watch-css": "onchange scss/blogel.scss -- npm run build-css",
     "watch-flow": "onchange 'server/*.js' 'server/**/*.js' -- npm run flow",
-    "test": "mocha --compilers js:babel-core/register test/*.spec.js"
+    "test": "gulp test"
   },
   "keywords": [
     "generator",
@@ -67,6 +67,7 @@
     "babel-core": "^6.2.1",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.2.0",
     "babel-plugin-transform-flow-strip-types": "^6.1.18",
+    "babel-preset-es2015": "^6.3.13",
     "clean-css": "^3.3.6",
     "gulp": "^3.9.0",
     "gulp-mocha": "^2.2.0",
