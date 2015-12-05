@@ -3,11 +3,17 @@
 import gulp from 'gulp'
 import mocha from 'gulp-mocha'
 import rethinkdb from './test/rethinkdb'
+import { init } from './server/db.js'
 
 gulp.task('default', () => console.log('Default Task'))
 gulp.task('test', () => {
   let stopRdb = rethinkdb()
-  let delay = 7500
+  setTimeout(() => {
+    init()
+  }, 2500)
+
+  let delay = 10000
+
   setTimeout(() => {
     gulp.src('test/*.spec.js')
       .pipe(mocha({
