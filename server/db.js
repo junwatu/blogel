@@ -2,16 +2,24 @@
 'use strict'
 
 import type { Post, Author, PostSum } from './core/types.js'
+import r from 'rethinkdb'
 
 const DB_NAME = 'blogel'
 const POST_TABLE_NAME = 'posts'
 const AUTHORS_TABLE_NAME = 'authors'
 
-const r = require('rethinkdb')
 const root = require('./util').path()
 const options = { host: 'localhost', port: 28015, authkey:'', db:DB_NAME}
 
-asyncInitDb();
+asyncInitDb()
+
+/**
+export default class Db () {
+  constructor () {
+    
+  }
+}
+*/
 
 function asyncInitDb(log:boolean = true) {
     getDbConnection()
@@ -128,8 +136,8 @@ function getAllPostSum(): Promise {
   return new Promise((resolve, reject) => {
     getDbConnection().then((conn) => {
       r.db(DB_NAME).table(POST_TABLE_NAME).run(conn, (err, cursor) => {
-        if (err) { 
-          reject(err) 
+        if (err) {
+          reject(err)
         } else {
           cursor.each((err, row) => {
             let post = {}
@@ -141,9 +149,9 @@ function getAllPostSum(): Promise {
             if(!err) allPostSum.push(post)
           })
           resolve(allPostSum)
-        } 
+        }
       })
-    })    
+    })
   })
 }
 
@@ -153,16 +161,35 @@ function getAllPost(): Promise {
   return new Promise((resolve, reject) => {
     getDbConnection().then((conn) => {
       r.db(DB_NAME).table(POST_TABLE_NAME).run(conn, (err, cursor) => {
-        if (err) { 
-          reject(err) 
+        if (err) {
+          reject(err)
         } else {
           cursor.each((err, row) => {
             if(!err) allPost.push(row)
           })
           resolve(allPost)
-        } 
+        }
       })
-    })    
+    })
+  })
+}
+
+function getAllPostDraft(): Promise {
+  let allPostDraft: Array<Post> = []
+
+  return new Promise((resolve, reject) => {
+    getDbConnection().then((conn) => {
+      r.db(DB_NAME).table(POST_TABLE_NAME).filter({status: 'draft'}).run(conn, (err, cursor) => {
+        if (err) { 
+          reject(err)
+        } else {
+          cursor.each((err, row) => {
+            if(!err) allPostDraft.push(row)
+          })
+          resolve(allPostDraft)
+        }
+      })
+    })
   })
 }
 
@@ -182,8 +209,8 @@ function updateThePost(post:Post): Promise {
 	        if(post.generated_keys != null){
                 r.db(DB_NAME).table(POST_TABLE_NAME).get(post.generated_keys).update(post).run(conn, (err, status) => {
                     err ? reject(err) : resolve(post);
-                })    
-            }  
+                })
+            }
 	      })
     });
 }
