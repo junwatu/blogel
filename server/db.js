@@ -3,40 +3,61 @@
 
 import type { Post, Author, PostSum } from './core/types.js'
 import r from 'rethinkdb'
+import { Logger } from './logger'
 
 const DB_NAME = 'blogel'
 const POST_TABLE_NAME = 'posts'
 const AUTHORS_TABLE_NAME = 'authors'
-
-const root = require('./util').path()
 const options = { host: 'localhost', port: 28015, authkey:'', db:DB_NAME}
 
-//init()
+let Log = Logger()
 
-function init(log:boolean = true) {
+function init() {
     getDbConnection().then((conn) => {
       dbIsExist(conn).then((status) => {
         if(!status.exist) {        
-          createDatabase(conn).then((result) => {
-            console.log(`Create database ${DB_NAME}`)
-            isTableExist(POST_TABLE_NAME, conn).then((status) => {
-              if(!status.exist) {
-                createTable(POST_TABLE_NAME, status.conn).then((result) => {
-                  console.log(`Create table ${POST_TABLE_NAME}`)
-                  isTableExist(AUTHORS_TABLE_NAME, conn).then((status) => {
-                    if(!status.exist) {
-                      createTable(AUTHORS_TABLE_NAME, status.conn).then(() => {
-                        console.log(`Create table ${AUTHORS_TABLE_NAME}`)
-                      })
-                    }
-                  })
-                })
-              }
-            })
-          })
+          createDatabase(conn)
+          .then(initPostTable(conn))
+          .then(initAuthorTable(conn))
+          .catch((err) => console.log(err))
         }
       }, (err) => console.log(err))
     }, (err) => console.log(err))
+}
+
+function initPostTable (conn: any): Promise {
+  return new Promise((resolve, reject) => {
+    isTableExist(POST_TABLE_NAME, conn).then((status) => {
+      if(!status.exist) {
+        createTable(POST_TABLE_NAME, status.conn).then((result) => { 
+          Log.info(`Create ${POST_TABLE_NAME} table`)
+          resolve(true)
+        }, (err) => {
+          Log.info(err)
+          reject(err)
+        })
+      } else {
+        resolve(true)
+      }
+    })
+  })
+}
+
+function initAuthorTable (conn: any): Promise {
+  return new Promise((resolve, reject) => {
+    isTableExist(AUTHORS_TABLE_NAME, conn).then((status) => {
+      if(!status.exist) {
+        createTable(AUTHORS_TABLE_NAME, status.conn).then(() => {
+          Log.info(`Create ${AUTHORS_TABLE_NAME} table`)
+          resolve(true)
+        }, (err) => { 
+          Log.info(err)
+          reject(err) })
+      } else {
+        resolve(true)
+      }
+    })
+  })    
 }
 
 function p(conn: any): Promise {

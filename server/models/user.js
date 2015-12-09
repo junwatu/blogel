@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 var db = require('../db');
 var bcrypt = require('bcrypt-nodejs');

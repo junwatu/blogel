@@ -12,14 +12,20 @@ import favicon from 'express-favicon'
 
 import * as r from './routes'
 import Api from './routes/api'
-import config from './config'
+import Config from './config'
+import { init } from './db'
+import { rootPath } from './util'
+import { Logger } from './logger'
 
-const root = require('./util')
-const Logger = require('./logger').Logger
 const pring = express()
 const routerAPI = express.Router()
+const root = rootPath()
 
 let blogelApp = new Api()
+let config = new Config()
+let Log = Logger()
+
+init()
 
 require('./middleware/auth/passport')(passport)
 
@@ -32,7 +38,7 @@ pring.use(bodyParser.urlencoded({ extended: true }))
 pring.use(bodyParser.json())
 pring.use(cookieParser())
 pring.use(methodOverride())
-pring.use(favicon(`${root.path()}/public/favicon.ico`))
+pring.use(favicon(`${root}/public/favicon.ico`))
 
 pring.use(session({
   secret: 'pagedekisasimplestaticgenerator',
@@ -43,8 +49,8 @@ pring.use(session({
 pring.use(passport.initialize())
 pring.use(passport.session())
 pring.use(flash())
-pring.use(express.static(`${root.path()}/public`))
-pring.set('views', `${root.path()}/views`)
+pring.use(express.static(`${root}/public`))
+pring.set('views', `${root}/views`)
 pring.engine('html', engine.handlebars)
 pring.set('view engine', 'html')
 
@@ -81,8 +87,8 @@ pring.get('/signup', r.signupPage)
 pring.get('/logout', r.logout)
 pring.get('/user', isLoggedin, r.user)
 
-pring.listen(config.get('express:port'), () => Logger.info(`Blogel is running on port ${config.get('express:port')}`))
+pring.listen(config.get('express:port'), () => Log.info(`Blogel is running on port ${config.get('express:port')}`))
 
-process.on('unhandledRejection', (err) => Logger.error(err.stack))
+process.on('unhandledRejection', (err) => Log.error(err.stack))
 
 module.exports = { express, pring }

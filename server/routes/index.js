@@ -10,6 +10,8 @@ import { savePost, getAllPost, getPostById, updateThePost } from '../db.js'
 const app = require('../../package.json')
 const striptags = require('striptags')
 
+let Log = Logger()
+
 function defaultRoute (req: any, res: any) {
   res.render('index', { "title": app.name, "version": app.version })
 }

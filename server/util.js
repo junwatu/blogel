@@ -1,6 +1,6 @@
-'use strict';
-var path = require('path');
+'use strict'
+import path from 'path'
 
-exports.path = () => {
-    return path.normalize(__dirname + '../..');
+export function rootPath () {
+  return path.normalize(__dirname + '../..')
 }

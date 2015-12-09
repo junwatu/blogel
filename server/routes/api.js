@@ -2,13 +2,15 @@
 'use strict'
 
 import moment from 'moment'
+import striptags from 'striptags'
+
 import type { Post, PostCreated } from '../core/types.js'
 import { compile } from '../core/compile'
 import { Logger } from '../logger'
 import { savePost, getAllPost, getPostById, updateThePost } from '../db.js'
 
 const app = require('../../package.json')
-const striptags = require('striptags')
+let Log = Logger()
 
 export default class Api {
   constructor () {}

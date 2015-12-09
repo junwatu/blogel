@@ -1,13 +1,14 @@
 /* @flow */
 'use strict'
 
+import fs from 'fs'
+import handlebars from 'handlebars'
+import { rootPath } from '../util'
+
 const TEMPLATE_INDEX = 'template/index.hbs'
 const STATIC_FOLDER = 'static'
-
-const fs = require('fs')
-const handlebars = require('handlebars')
-const root = require('../util').path()
 const static_folder = `${root}/${STATIC_FOLDER}/`
+const root = rootPath()
 
 import { mkdirp } from 'mkdirp'
 import { genFilename, cleanHtmlTags } from './helper.js'
