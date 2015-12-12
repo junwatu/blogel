@@ -8,7 +8,6 @@ var post = {
     postPublished: '',
     lastUpdated: '22-07-2015',
     status: 'draft',
-    // should be author id: string
     author: 'Maheso Anabrang',
     tags: ['hello', 'dummy']
 };
@@ -20,7 +19,6 @@ var post_update = {
     postPublished: new Date(),
     lastUpdated: '22-07-2015',
     status: 'published',
-    // should be author id: string
     author: 'Maheso Anabrang',
     tags: ['hello', 'dummy', 'electronic']
 }
