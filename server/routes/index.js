@@ -18,10 +18,12 @@ function defaultRoute (req: any, res: any) {
 
 function user (req: any, res: any) {
   getAllPost().then((result) => {
-    
+
     result.forEach((el, index, array) => {
       result[index].title = striptags(result[index].title)
     })
+
+    console.log(result);
 
     res.render('list', {
       "title": app.name,
@@ -30,6 +32,15 @@ function user (req: any, res: any) {
       "user": req.user
     });
   }, (err) => console.log(err))
+}
+
+function newPost (req: any, res: any) {
+  res.render('new', {
+    post: {
+      status: 'New',
+      created: new Date()
+    }
+  });
 }
 
 function getPostView (req: any, res: any) {
@@ -42,7 +53,7 @@ function getPostView (req: any, res: any) {
 
 function listPostsAPI (req: any, res: any) {
   getAllPost().then((result) => {
-    res.json(result)  
+    res.json(result)
   }, (err) => console.log(err))
 }
 
@@ -95,6 +106,7 @@ function logout (req: any, res: any) {
 module.exports = {
   defaultRoute,
   user,
+  newPost,
   listPostsAPI,
   listDraftPostsAPI,
   listPublishedPostsAPI,

@@ -24,9 +24,9 @@ export default class Api {
     let doc: Post = {
       title: req.body.post.title.value,
       content: req.body.post.content.value,
-      postCreated : now.toString(),
+      postCreated : now,
       postPublished: '',
-      lastUpdated: now.toString(),
+      lastUpdated: now,
       status: req.body.post.status,
       author: '',
       tags: ['hello', 'world']
@@ -34,7 +34,7 @@ export default class Api {
 
     savePost(doc).then((result) => {
       compile(doc).then((status) => {
-        let jsonOut = { post: status, id: result.generated_keys }
+        let jsonOut = { post: status, id: result.id }
         res.json(jsonOut)
       }, (err) => res.json({ error: err }))
     }, (err) => res.json({ error: err }))
@@ -45,16 +45,17 @@ export default class Api {
     let doc: Post = {
       title: req.body.post.title.value,
       content: req.body.post.content.value,
-      postCreated : now.toString(),
       postPublished: '',
-      lastUpdated: now.toString(),
+      lastUpdated: now,
       status: req.body.post.status,
       author: '',
       tags: ['hello', 'world'],
-      generated_keys: req.params.id
+      id: req.body.post.id
     }
 
-    updateThePost(doc).then((result) => res.json(result))
+    updateThePost(doc)
+    .then((result) => res.json(result))
+    .catch(err => Log.error(err))
   }
 
   listPostAPI (req: any, res: any) {

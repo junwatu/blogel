@@ -15,21 +15,21 @@ let Log = Logger()
 function init() {
     getDbConnection().then((conn) => {
       dbIsExist(conn).then((status) => {
-        if(!status.exist) {        
+        if(!status.exist) {
           createDatabase(conn)
           .then(initPostTable(conn))
           .then(initAuthorTable(conn))
-          .catch((err) => console.log(err))
+          .catch((err) => Log.error(err))
         }
-      }, (err) => console.log(err))
-    }, (err) => console.log(err))
+      }, (err) => Log.error(err))
+    }, (err) => Log.error(err))
 }
 
 function initPostTable (conn: any): Promise {
   return new Promise((resolve, reject) => {
     isTableExist(POST_TABLE_NAME, conn).then((status) => {
       if(!status.exist) {
-        createTable(POST_TABLE_NAME, status.conn).then((result) => { 
+        createTable(POST_TABLE_NAME, status.conn).then((result) => {
           Log.info(`Create ${POST_TABLE_NAME} table`)
           resolve(true)
         }, (err) => {
@@ -50,14 +50,14 @@ function initAuthorTable (conn: any): Promise {
         createTable(AUTHORS_TABLE_NAME, status.conn).then(() => {
           Log.info(`Create ${AUTHORS_TABLE_NAME} table`)
           resolve(true)
-        }, (err) => { 
+        }, (err) => {
           Log.info(err)
           reject(err) })
       } else {
         resolve(true)
       }
     })
-  })    
+  })
 }
 
 function p(conn: any): Promise {
@@ -182,7 +182,7 @@ function getAllPostDraft(): Promise {
   return new Promise((resolve, reject) => {
     getDbConnection().then((conn) => {
       r.db(DB_NAME).table(POST_TABLE_NAME).filter({status: 'draft'}).run(conn, (err, cursor) => {
-        if (err) { 
+        if (err) {
           reject(err)
         } else {
           cursor.each((err, row) => {
@@ -206,13 +206,18 @@ function getPostById(id:string): Promise {
 }
 
 function updateThePost(post:Post): Promise {
+    console.log(post)    
     return new Promise((resolve, reject) => {
         getDbConnection().then((conn) => {
-	        if(post.generated_keys != null){
-                r.db(DB_NAME).table(POST_TABLE_NAME).get(post.generated_keys).update(post).run(conn, (err, status) => {
-                    err ? reject(err) : resolve(post);
-                })
-            }
+	        if(post.id != null){
+            r.db(DB_NAME).table(POST_TABLE_NAME).get(post.id).update(post).run(conn, (err, status) => {
+              Log.info(status)
+              err ? reject(err) : resolve(post);
+            })
+          } else {
+            Log.error('No such a post')
+            reject('No such a post')
+          }
 	      })
     });
 }

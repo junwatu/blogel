@@ -20,10 +20,10 @@ import { Logger } from './logger'
 const pring = express()
 const routerAPI = express.Router()
 const root = rootPath()
+const Log = Logger()
 
 let blogelApp = new Api()
 let config = new Config()
-let Log = Logger()
 
 init()
 
@@ -66,6 +66,7 @@ routerAPI.route('/posts/:id')
   .put(blogelApp.updatePostAPI)
   .delete(r.deletePostAPI)
 
+pring.get('/posts/new', r.newPost)
 pring.use('/api', routerAPI)
 
 pring.get('/posts/:id', r.getPostView)
