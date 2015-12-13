@@ -17,11 +17,11 @@
   "scripts": {
     "build": "npm run copy && npm run build-css && npm run build-js",
     "build-css": "npm run sass && scripts/cat-css.sh | cleancss -o public/css/bundle.min.css",
-    "build-js": "browserify public/js/blogelweb.js | uglifyjs -mc > public/js/bundle.min.js",
+    "build-js": " browserify public/js/app.js | uglifyjs -mc > public/js/app.min.js && browserify public/js/blogelweb.js | uglifyjs -mc > public/js/bundle.min.js",
     "copy": "scripts/copy-assets.sh",
     "flow": "echo 'flow check...' && flow",
     "sass": "sass scss/blogel.scss public/css/blogel.css",
-    "start": "/usr/bin/babel-node blogel.js | ./node_modules/.bin/bunyan",
+    "start": "npm run build && /usr/bin/babel-node blogel.js | ./node_modules/.bin/bunyan",
     "watch-css": "onchange scss/blogel.scss -- npm run build-css",
     "watch-flow": "onchange 'server/*.js' 'server/**/*.js' -- npm run flow",
     "test": "gulp test"
