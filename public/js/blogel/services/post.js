@@ -52,6 +52,19 @@ Box.Application.addService('post', (application) => {
           error: (err) => reject(err)
         })
       })
+    },
+
+    deletePost: function(id) {
+      return new Promise((resolve, reject) => {
+        $.ajax({
+          url: '/api/posts/' + post.id,
+          type: 'delete',
+          data: id,
+          dataType: 'json',
+          success: (data) => resolve(data),
+          error: (err) => reject(err)
+        })
+      })
     }
   }
 })
