@@ -21,7 +21,6 @@ function onPublish (event) {
 
 function onUpdate (event) {
   var content = editor.serialize()
-  var idStatus = document.getElementById('status')
   var postId = idStatus.getAttribute('title')
   var post_content_update = {
     post: {
@@ -47,9 +46,17 @@ function onSetting (event) {
 
 function onDeleteDoc (event) {
   console.log('trash-btn clicked!')
+  var postId = idStatus.getAttribute('title')
+
+  service.deletePost(postId).then(function (data) {
+    console.log(data)
+    window.location.href = '/'
+  }, function(err) {
+    console.log(err)
+  })
 }
 
 $('#publish-btn').on('click', onPublish)
 $('#update-btn').on('click', onUpdate)
 $('#setting-btn').on('click', onSetting)
-$('#trash-btn').on('click', onDeleteDoc)
+$('#delete-btn').on('click', onDeleteDoc)
