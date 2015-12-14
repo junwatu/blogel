@@ -5,7 +5,7 @@ import moment from 'moment'
 import type { Post, PostCreated } from '../core/types.js'
 import { compile } from '../core/compile'
 import { Logger } from '../logger'
-import { savePost, getAllPost, getPostById, updateThePost } from '../db.js'
+import { savePost, getAllPost, getPostById, updateThePost, deletePost } from '../db.js'
 
 const app = require('../../package.json')
 const striptags = require('striptags')
@@ -77,9 +77,7 @@ function getPostAPI (req: any, res: any) {
 }
 
 function deletePostAPI (req: any, res: any) {
-    res.json({
-        process: 'delete post'
-    });
+  deletePost(req.params.id).then(result => res.json( { post: result }), err => Log.error(err))
 }
 
 function loginPage (req: any, res: any) {
