@@ -15,7 +15,7 @@ Box.Application.addService('post', (application) => {
         })
       })
     },
-    
+
     getPostById: function (id) {
       return new Promise((resolve, reject) => {
         $.ajax({
@@ -57,7 +57,7 @@ Box.Application.addService('post', (application) => {
     deletePost: function(id) {
       return new Promise((resolve, reject) => {
         $.ajax({
-          url: '/api/posts/' + post.id,
+          url: '/api/posts/' + id,
           type: 'delete',
           data: id,
           dataType: 'json',
