@@ -23,11 +23,13 @@
                 </ul>
             </div>
         </header>
-        <div class="sixteen columns page-status">
+        <div>
+          <div class="sixteen columns page-status">
             <span id="status" title="{{post.id}}">{{post.status}}</span> <i class="fa fa-calendar-o"></i> {{post.lastUpdated}}
+          </div>
+          <h1 class="editable">{{post.title}}></h1>
+          <div class="editable sixteen columns">{{post.content}}</div>
         </div>
-        <h1 class="editable">{{post.title}}></h1>
-        <div class="editable sixteen columns">{{post.content}}</div>
     </div>
     <script src="/js/vendor/jquery-1.11.0.min.js"></script>
     <script src="/js/vendor/t3-2.0.2.js"></script>
