@@ -32,8 +32,6 @@ function onUpdate (event) {
     }
   }
 
-  console.log(post_content_update)
-
   service.updatePost(post_content_update).then(function (data) {
     console.log(data)
     editor.setContent(data.title, 0)
