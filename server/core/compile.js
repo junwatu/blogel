@@ -7,8 +7,9 @@ import { rootPath } from '../util'
 
 const TEMPLATE_INDEX = 'template/index.hbs'
 const STATIC_FOLDER = 'static'
-const static_folder = `${root}/${STATIC_FOLDER}/`
+
 const root = rootPath()
+const static_folder = `${root}/${STATIC_FOLDER}/`
 
 import { mkdirp } from 'mkdirp'
 import { genFilename, cleanHtmlTags } from './helper.js'
@@ -32,7 +33,7 @@ function compile (docData: Post): Promise {
         postCreated: dateCreated,
         post: docData
       };
-    
+
       saveCompiled(docContent).then((status) => resolve(status), (err) => reject(err))
       })
     })
